@@ -1,25 +1,24 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title> Memlaps </title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
+    <link href="css/bootstrap-arrows.css" rel="stylesheet" type="text/css" />
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/bootstrap-arrows.js"></script>
 
-    
-  </head>
-  <body>
-	<div class ="navbar navbar-inverse navbar-static-top">
-		<div class = "container">
-            
-            <ul class=" nav navbar-nav navbar-left ">
-			    <li><a href = "#" class = "">Blank Page</a></li>
-                <li><a href="#" class="">Tutorial</a></li>
-                <li><a href="#" class="">File Name</a></li>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+
+            <ul class="nav navbar-form navbar-left ">
+                <li><a href="index.html" class="btn btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a></li>
             </ul> 
-
             <ul class=" nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -27,21 +26,21 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="MyProfile.html">My Profile</a></li>
+                        <li><a href="#">My Profile</a></li>
                         <li><a href="#">My Files</a></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
-             </ul>
+            </ul>
 
         </div>
-	</div>
+    </div>
     <?php
-      include('dbConnect.php');
+    include('dbConnect.php');
     ?>
-    
-    <h1>Hello World!</h1>
-	
-  </body>
 
-    
+    <h1>Hello World!</h1>
+
+</body>
+
+
 </html>
