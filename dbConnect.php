@@ -3,6 +3,6 @@
         define("USER","");
         define("PASS","");
         define("DBNAME","");
-       
+        
         $DBconnection=mysqli_connect(HOST,USER,PASS,DBNAME);
   ?>
