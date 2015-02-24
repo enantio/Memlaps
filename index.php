@@ -35,13 +35,13 @@
 	<div class ="navbar navbar-inverse navbar-static-top">
 		<div class = "container">
             
-            <ul class=" nav navbar-nav navbar-left "> <!--change this list to horizontal tabs (not hrefs)-->
+            <ul class=" nav navbar-nav navbar-left "> 
 			    <li><a href="#" class="">Blank Page</a></li>
                 <li><a href="#" class="">Tutorial</a></li>
                 <li><a href="#" class="">File Name</a></li>
             </ul> 
 
-            <ul class=" nav navbar-nav navbar-right"> <!--css righ positioned-->
+            <ul class=" nav navbar-nav navbar-right"> 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         My Account
