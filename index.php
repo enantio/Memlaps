@@ -32,17 +32,19 @@
 			}
 		}
     ?>
-	<div class ="navbar navbar-inverse navbar-static-top">
+	<div class ="navbar navbar-inverse navbar-static-top"> <!--Navigation Bar -->
 		<div class = "container">
             
             <ul class=" nav navbar-nav navbar-left ">
-			    <li><a href = "#" class = "">Blank Page</a></li>
+			    <li><a href = "index.php?username=<?php include('displayUN.php');?>" class = "">Blank Page</a></li>  <!--Sends back to blank page. If you don't have an account it displays account page though-->
                 <li><a href="#" class="">Tutorial</a></li>
                 <li><a href="#" class="">File Name</a></li>
             </ul> 
-
+	
+			
             <ul class=" nav navbar-nav navbar-right">
-                <li class="dropdown">
+              <?php if(isset($_POST["username"]) || isset($_GET["username"])) : ?>  <!--Checks to see if signed in-->
+					<li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         My Account
                         <span class="caret"></span>
@@ -50,15 +52,18 @@
                     <ul class="dropdown-menu">
                         <li><a href="MyProfile.php?username=<?php include('displayUN.php');?>">My Profile</a></li>
                         <li><a href="#">My Files</a></li>
-                        <li><a href="memlapsSignIn.html">Logout</a></li>
+                        <li><a href="index.php">Logout</a></li>
                     </ul>
+				 <?php else :?> 
+					<li><a href = "memlapsSignIn.html" class = "">Sign In</a></li>
+				 <?php endif; ?> 
+				
              </ul>
-
-        </div>
-	</div>
-    
-    
-    <div><!--main note div-->
+	
+			</div>
+		</div>
+   
+    <div class = "container"><!--main note div-->
 		<form action="index.php?username=<?php include('displayUN.php');?>" method="POST"/>
 			<textarea cols="150" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
 			</br><h4>Title:<h4>
