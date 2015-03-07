@@ -55,7 +55,7 @@
                         <li><a href="index.php">Logout</a></li>
                     </ul>
 				 <?php else :?> 
-					<li><a href = "memlapsSignIn.html" class = "">Sign In</a></li>
+					<li><a href = "memlapsSignIn.php" class = "">Sign In</a></li>
 				 <?php endif; ?> 
 				
              </ul>
