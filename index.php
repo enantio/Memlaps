@@ -14,21 +14,23 @@
 	<?php
       include('dbConnect.php');
 		if(isset($_POST['noteText'])){
-			$statement="select * from Notes where author='". $_POST["username"]."' and title='". $_POST["title"]."';";
+			if(!isset($_GET['author']))$author=$_POST['username'];
+			else $author=$_GET['author'];
+
+			$statement="select * from Notes where author='".$author."' and title='". $_POST["title"]."';";
+			
 			$note=mysqli_query($DBconnection,$statement);
 			$dataRow=mysqli_fetch_array($note,MYSQL_BOTH);
 			
 			if(!$dataRow){//check for existing note page
 				mysqli_free_result($note);
-				$statement="INSERT INTO Notes VALUES('".$_POST['title']."','".$_POST['username']."','".$_POST['comments']."','".$_POST['noteText']."','".date("r")."','meta stuff');";
+				$statement="INSERT INTO Notes VALUES('".$_POST['title']."','".$author."','".$_POST['comments']."','".$_POST['noteText']."','".date("r")."','meta stuff');";
 				mysqli_query($DBconnection,$statement);
 			}
 			else{
 				mysqli_free_result($note);
-				$statement="UPDATE Notes SET notes='".$_POST['noteText']."', title='".$_POST['title']."', comments='".$_POST['comments']."' WHERE author='". $_POST['username']."' and title='". $_POST['title']."';";
+				$statement="UPDATE Notes SET notes='".$_POST['noteText']."', title='".$_POST['title']."', comments='".$_POST['comments']."' WHERE author='".$author."' and title='". $_POST['title']."';";
 				mysqli_query($DBconnection,$statement);
-				
-				
 			}
 		}
     ?>
@@ -63,8 +65,12 @@
 			</div>
 		</div>
    
-    <div class = "container"><!--main note div-->
+   <div class = "container"><!--main note div-->
+	<?php if(!isset($_GET['author'])) :?>
 		<form action="index.php?username=<?php include('displayUN.php');?>" method="POST"/>
+	<?php else:?>
+		<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST"/>
+	<?php endif; ?>
 			<textarea cols="150" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
 			</br><h4>Title:<h4>
 			<input type="text" name="title" value="<?php include('titleDis.php'); ?>"/>
@@ -74,7 +80,7 @@
 			<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 			<br/>	
 			<input type="submit" value="save"/>
-        </form>
+        	</form>
 	</div>
 	
   </body>
