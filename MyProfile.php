@@ -52,7 +52,7 @@
 					echo "You do not have any note files saved.";
 				}
 					
-					echo "<table class = 'table table-hover'>";//Basic table
+					echo "<h3>Your Notes</h3></br><table class = 'table table-hover'>";//Basic table
 						echo "<thead>";
 							echo "<th>File Name</th>";
 						echo "</thead>";
@@ -68,9 +68,65 @@
 									echo "</a></td></tr>";
 							}
 						echo "</tbody>";
-					echo "</table>";
+					echo "</table></br>";
 				
 				mysqli_free_result($notes);	
+				//notes shared with user table
+				$statement="select * from Note_Share where share_W_user='". $_GET["username"]."' OR share_W_user='ADMIN';";
+				$notes=mysqli_query($DBconnection,$statement);
+				
+				if (!$notes) { 
+					echo "You do not have any note files shared with you.";
+				}
+					
+					echo "</br><h3>Notes shared with you.</h3></br><table class = 'table table-hover'>";//Basic table
+						echo "<thead>";
+							echo "<th>File Name</th>";
+						echo "</thead>";
+						echo "<tbody>";
+							while($dataRow=mysqli_fetch_array($notes,MYSQL_BOTH)){
+									//temporary
+									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+									echo $dataRow['title'];
+									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+									echo $dataRow['author'];
+									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+									if($dataRow['share_W_user']=="ADMIN")echo "Public";
+									else echo $dataRow['share_W_user'];
+									echo "</a></td></tr>";
+							}
+						echo "</tbody>";
+					echo "</table>";
+				
+				mysqli_free_result($notes);
+				//notes shared by user table
+				$statement="select * from Note_Share where author='".$_GET["username"]."';";
+				$notes=mysqli_query($DBconnection,$statement);
+				
+				if (!$notes) { 
+					echo "You are not sharing any note files.";
+				}
+					
+					echo "</br><h3>Notes shared by you.</h3></br><table class = 'table table-hover'>";//Basic table
+						echo "<thead>";
+							echo "<th>File Name</th>";
+						echo "</thead>";
+						echo "<tbody>";
+							while($dataRow=mysqli_fetch_array($notes,MYSQL_BOTH)){
+									//temporary
+									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+									echo $dataRow['title'];
+									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+									echo $dataRow['author'];
+									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+									if($dataRow['share_W_user']=="ADMIN")echo "Public";
+									else echo $dataRow['share_W_user'];
+									echo "</a></td></tr>";
+							}
+						echo "</tbody>";
+					echo "</table>";
+				
+				mysqli_free_result($notes);
 			}
 			
 		?>
