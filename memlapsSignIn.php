@@ -39,11 +39,12 @@
 					<input type="text" name="username" placeholder ="Username"/>
 				</div>
 				<div class = "form-group">
-					<input type="text" name="password" placeholder="Password"/>
+					<input type="password" name="password" placeholder="Password"/>
 				</div>
 				<button type="submit" class="btn btn-default btn-sm">Sign In</button>
 				
 			</form>
 		</div>
+		
 	</body>
 </html>

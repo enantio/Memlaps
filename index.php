@@ -35,13 +35,15 @@
 		}
     ?>
 	<div class ="navbar navbar-inverse navbar-static-top"> <!--Navigation Bar -->
-		<div class = "container">
+		<div class = "container" role = "tabpanel">
             
-            <ul class=" nav navbar-nav navbar-left ">
-			    <li><a href = "index.php?username=<?php include('displayUN.php');?>" class = "">Blank Page</a></li>  <!--Sends back to blank page. If you don't have an account it displays account page though-->
-                <li><a href="#" class="">Tutorial</a></li>
-                <li><a href="#" class="">File Name</a></li>
-            </ul> 
+            <ul class=" nav navbar-nav" role = "tablist">
+			    <li role="presentation" <?php if(!isset($_POST["title"]) && !isset($_GET["title"])):?> class = "active" <?php endif; ?>  ><a href = "#BlankPage"  aria-controls="BlankPage" role="tab" data-toggle="tab">Blank Page</a></li>  <!--Sends back to blank page. If you don't have an account it displays account page though-->
+                
+				<li role="presentation"><a href="#Tutorial"  aria-controls="Tutorial" role="tab" data-toggle="tab"> Tutorial</a></li>
+                <?php if(isset($_POST["title"]) || isset($_GET["title"]))  :?><li role="presentation" class = "active"><a href="#FileName"  aria-controls="FileName" role="tab" data-toggle="tab"><?php include('titleDis.php'); ?></a></li>
+				<?php endif; ?> 
+			</ul> 
 	
 			
             <ul class=" nav navbar-nav navbar-right">
@@ -57,7 +59,8 @@
                         <li><a href="index.php">Logout</a></li>
                     </ul>
 				 <?php else :?> 
-					<li><a href = "memlapsSignIn.php" class = "">Sign In</a></li>
+					<li><a href = "memlapsSignIn.php" >Sign In</a></li>
+					<li><a href ="memlapsSignUp.php">Sign Up</a></li>
 				 <?php endif; ?> 
 				
              </ul>
@@ -65,22 +68,45 @@
 			</div>
 		</div>
    
-   <div class = "container"><!--main note div-->
-	<?php if(!isset($_GET['author'])) :?>
-		<form action="index.php?username=<?php include('displayUN.php');?>" method="POST"/>
-	<?php else:?>
-		<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST"/>
-	<?php endif; ?>
-			<textarea cols="150" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
-			</br><h4>Title:<h4>
-			<input type="text" name="title" value="<?php include('titleDis.php'); ?>"/>
-			</br><h4>Comments:<h4>
-			<input type="text" name="comments" value="<?php include('commentDis.php'); ?>"/>
-			<br/>
-			<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
-			<br/>	
-			<input type="submit" value="save"/>
+   <div class = "tab-content container" ><!--main note div-->
+	<div role="tabpanel" class="tab-pane  <?php if(isset($_POST["title"]) || isset($_GET["title"])):?>active<?php endif; ?> " id="FileName">
+		<?php if(!isset($_GET['author'])) :?>
+			<form action="index.php?username=<?php include('displayUN.php');?>" method="POST"/>
+		<?php else:?>
+			<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST"/>
+		<?php endif; ?>
+				<textarea cols="150" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
+				</br><h4>Title:<h4>
+				<input type="text" name="title" value="<?php include('titleDis.php'); ?>"/>
+				</br><h4>Comments:<h4>
+				<input type="text" name="comments" value="<?php include('commentDis.php'); ?>"/>
+				<br/>
+				<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
+				<br/>	
+				<input type="submit" value="save"/>
         	</form>
+	</div>
+		<div role="tabpanel" class="tab-pane  <?php if(!isset($_POST["title"]) && !isset($_GET["title"])):?> active <?php endif; ?>"id="BlankPage">
+			<?php if(!isset($_GET['author'])) :?>
+			<form action="index.php?username=<?php include('displayUN.php');?>" method="POST"/>
+		<?php else:?>
+			<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST"/>
+		<?php endif; ?>
+				<textarea cols="150" rows="25" name="noteText"></textarea>
+				</br><h4>Title:<h4>
+				<input type="text" name="title" />
+				</br><h4>Comments:<h4>
+				<input type="text" name="comments"/>
+				<br/>
+				<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
+				<br/>	
+				<input type="submit" value="save"/>
+        	</form>
+		</div>
+	
+		<div role="tabpanel" class="tab-pane" id="Tutorial">
+		<h3>Tutorial</h3>
+		</div>
 	</div>
 	
   </body>

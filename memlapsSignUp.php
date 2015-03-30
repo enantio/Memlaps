@@ -47,7 +47,7 @@
 				
 					<input type="text" name="username" placeholder ="Username"/>
 					</br>
-					<input type="text" name="password" placeholder="Password"/>
+					<input type="password" name="password" placeholder="Password"/>
 					</br>
 					<input type="text" name="name" placeholder="your name here"/>
 					</br>
