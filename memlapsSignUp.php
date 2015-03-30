@@ -51,7 +51,7 @@
 					</br>
 					<input type="text" name="name" placeholder="your name here"/>
 					</br>
-					<input type="text" name="email" placeholder="memlaps@example.com"/>
+					<input type="email" name="email" placeholder="memlaps@example.com"/>
 				
 				</div>
 				<button type="submit" class="btn btn-default btn-sm">Sign Up</button>

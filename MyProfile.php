@@ -55,17 +55,19 @@
 					echo "<h3>Your Notes</h3></br><table class = 'table table-hover'>";//Basic table
 						echo "<thead>";
 							echo "<th>File Name</th>";
+							echo "<th>Author</th>"	;
+							echo "<th>Last Modified</th>";
 						echo "</thead>";
 						echo "<tbody>";
 							while($dataRow=mysqli_fetch_array($notes,MYSQL_BOTH)){
 									//temporary
 									echo "<tr><td><a href='index.php?username=".$dataRow['author']."&title=".$dataRow['title']."&comments=".$dataRow['comments']."'>";
 									echo $dataRow['title'];
-									echo "<tr><td><a href='index.php?username=".$dataRow['author']."&title=".$dataRow['title']."&comments=".$dataRow['comments']."'>";
+									echo "</a></td><td><a href='index.php?username=".$dataRow['author']."&title=".$dataRow['title']."&comments=".$dataRow['comments']."'>";
 									echo $dataRow['author'];
-									echo "<tr><td><a href='index.php?username=".$dataRow['author']."&title=".$dataRow['title']."&comments=".$dataRow['comments']."'>";
+									echo "</a></td><td>";
 									echo $dataRow['last_mod'];
-									echo "</a></td></tr>";
+									echo "</td></tr>";
 							}
 						echo "</tbody>";
 					echo "</table></br>";
@@ -82,15 +84,17 @@
 					echo "</br><h3>Notes shared with you.</h3></br><table class = 'table table-hover'>";//Basic table
 						echo "<thead>";
 							echo "<th>File Name</th>";
+							echo "<th>Author</th>"	;
+							echo "<th>Shared User</th>";
 						echo "</thead>";
 						echo "<tbody>";
 							while($dataRow=mysqli_fetch_array($notes,MYSQL_BOTH)){
 									//temporary
 									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
 									echo $dataRow['title'];
-									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+									echo "</a></td><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
 									echo $dataRow['author'];
-									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+									echo "</a></td><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
 									if($dataRow['share_W_user']=="ADMIN")echo "Public";
 									else echo $dataRow['share_W_user'];
 									echo "</a></td></tr>";
@@ -110,15 +114,17 @@
 					echo "</br><h3>Notes shared by you.</h3></br><table class = 'table table-hover'>";//Basic table
 						echo "<thead>";
 							echo "<th>File Name</th>";
+							echo "<th>Author</th>"	;
+							echo "<th>Shared User</th>";
 						echo "</thead>";
 						echo "<tbody>";
 							while($dataRow=mysqli_fetch_array($notes,MYSQL_BOTH)){
 									//temporary
 									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
 									echo $dataRow['title'];
-									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+									echo "</a></td><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
 									echo $dataRow['author'];
-									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+									echo "</a></td><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
 									if($dataRow['share_W_user']=="ADMIN")echo "Public";
 									else echo $dataRow['share_W_user'];
 									echo "</a></td></tr>";
