@@ -81,9 +81,10 @@
 			<?php else:?>
 				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST"/>
 			<?php endif; ?>
-					<textarea cols="150" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
-					</br><h4>Title:<h4>
+					
+					<h4>Title:<h4>
 					<input type="text" name="title" value="<?php include('titleDis.php'); ?>"/>
+					</br><textarea cols="150" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
 					</br><h4>Comments:<h4>
 					<input type="text" name="comments" value="<?php include('commentDis.php'); ?>"/>
 					<br/>
@@ -100,9 +101,9 @@
 			<?php else:?>
 				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST"/>
 			<?php endif; ?>
-					<textarea cols="150" rows="25" name="noteText"></textarea>
-					</br><h4>Title:<h4>
+					<h4>Title:<h4>
 					<input type="text" name="title" />
+					</br><textarea cols="150" rows="25" name="noteText"></textarea>
 					</br><h4>Comments:<h4>
 					<input type="text" name="comments"/>
 					<br/>
