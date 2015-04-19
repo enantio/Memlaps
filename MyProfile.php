@@ -15,6 +15,7 @@
 <body>
 	<?php
 		include('dbConnect.php');//connect to database
+		include ('addFriend.php');
     ?>
 	
     <div class="navbar navbar-inverse navbar-static-top"> <!--Navigation Bar -->
@@ -48,40 +49,42 @@
 				$statement="select * from Notes where author='". $_GET["username"]."';";
 				$notes=mysqli_query($DBconnection,$statement);
 				
-				if (!$notes) { 
+				echo "<h3>Your Notes</h3></br>";
+				if (mysqli_num_rows($notes)==0) { 
 					echo "You do not have any note files saved.";
-				}
-					
-					echo "<h3>Your Notes</h3></br><table class = 'table table-hover'>";//Basic table
-						echo "<thead>";
-							echo "<th>File Name</th>";
-							echo "<th>Author</th>"	;
-							echo "<th>Last Modified</th>";
-						echo "</thead>";
-						echo "<tbody>";
-							while($dataRow=mysqli_fetch_array($notes,MYSQL_BOTH)){
-									//temporary
-									echo "<tr><td><a href='index.php?username=".$dataRow['author']."&title=".$dataRow['title']."&comments=".$dataRow['comments']."'>";
-									echo $dataRow['title'];
-									echo "</a></td><td><a href='index.php?username=".$dataRow['author']."&title=".$dataRow['title']."&comments=".$dataRow['comments']."'>";
-									echo $dataRow['author'];
-									echo "</a></td><td>";
-									echo $dataRow['last_mod'];
-									echo "</td></tr>";
-							}
-						echo "</tbody>";
+				}	
+				else{
+					echo "<table class = 'table table-hover'>";//Basic table
+					echo "<thead>";
+						echo "<th>File Name</th>";
+						echo "<th>Author</th>"	;
+						echo "<th>Date of Creation</th>";
+					echo "</thead>";
+					echo "<tbody>";
+						while($dataRow=mysqli_fetch_array($notes,MYSQL_BOTH)){
+								//temporary
+								echo "<tr><td><a href='index.php?username=".$dataRow['author']."&title=".$dataRow['title']."&comments=".$dataRow['comments']."'>";
+								echo $dataRow['title'];
+								echo "</a></td><td><a href='index.php?username=".$dataRow['author']."&title=".$dataRow['title']."&comments=".$dataRow['comments']."'>";
+								echo $dataRow['author'];
+								echo "</a></td><td>";
+								echo $dataRow['last_mod'];
+								echo "</td></tr>";
+						}
+					echo "</tbody>";
 					echo "</table></br>";
-				
+				}
 				mysqli_free_result($notes);	
 				//notes shared with user table
 				$statement="select * from Note_Share where share_W_user='". $_GET["username"]."' OR share_W_user='ADMIN';";
 				$notes=mysqli_query($DBconnection,$statement);
 				
-				if (!$notes) { 
+				echo "</br><h3>Notes shared with you.</h3>";
+				if (mysqli_num_rows($notes)==0) { 
 					echo "You do not have any note files shared with you.";
-				}
-					
-					echo "</br><h3>Notes shared with you.</h3></br><table class = 'table table-hover'>";//Basic table
+				}	
+					else{
+						echo "</br><table class = 'table table-hover'>";//Basic table
 						echo "<thead>";
 							echo "<th>File Name</th>";
 							echo "<th>Author</th>"	;
@@ -101,17 +104,18 @@
 							}
 						echo "</tbody>";
 					echo "</table>";
-				
-				mysqli_free_result($notes);
+					mysqli_free_result($notes);
+				}
 				//notes shared by user table
 				$statement="select * from Note_Share where author='".$_GET["username"]."';";
 				$notes=mysqli_query($DBconnection,$statement);
 				
-				if (!$notes) { 
+				echo "</br><h3>Notes shared by you.</h3>";
+				if (mysqli_num_rows($notes)==0) { 
 					echo "You are not sharing any note files.";
-				}
-					
-					echo "</br><h3>Notes shared by you.</h3></br><table class = 'table table-hover'>";//Basic table
+				}	
+				else{
+						echo "</br><table class = 'table table-hover'>";//Basic table
 						echo "<thead>";
 							echo "<th>File Name</th>";
 							echo "<th>Author</th>"	;
@@ -131,14 +135,52 @@
 							}
 						echo "</tbody>";
 					echo "</table>";
-				
-				mysqli_free_result($notes);
+					mysqli_free_result($notes);
+				}
 			}
 			
 		?>
 		
 	</div>
-
+	<div class = "container"><!--friends div-->
+	
+	<?php
+		$statement="SELECT * FROM Friends WHERE username='".$_GET["username"]."';";
+		$friends=mysqli_query($DBconnection,$statement);
+		
+		echo "</br><h3>Your Friends</h3>";
+		if (mysqli_num_rows($friends)==0) { 
+			echo "You have no friends.";
+		}
+			 
+		else{
+			echo "</br><table class = 'table table-hover'>";//Basic table
+			echo "<thead>";
+				echo "<th>Username</th>";
+			echo "</thead>";
+			echo "<tbody>";
+				while($dataRow=mysqli_fetch_array($friends,MYSQL_BOTH)){
+						//temporary
+						echo "<tr><td>";
+						echo $dataRow['friend'];
+						echo "</td></tr>";
+				}
+			echo "</tbody>";
+			echo "</table>";
+		}
+		mysqli_free_result($friends);
+		
+	?>
+	
+	<form role = "form" action="MyProfile.php?username=<?php echo $_GET['username']; ?>" method="POST"/>
+		<div class = "form-group">
+			</br>	
+			<input type="text" name="addAFriend" placeholder ="New Friend's Name Here"/>
+			</br>
+		</div>
+		<button type="submit" class="btn btn-default btn-sm">Add Friend</button>
+	</form>
+	</div>
 </body>
 
 
