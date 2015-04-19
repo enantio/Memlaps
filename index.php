@@ -17,7 +17,7 @@
   </head>
   <body>
 	<?php
-      include('dbConnect.php');
+		include('dbConnect.php');
 		if(isset($_POST['noteText'])){
 			if(!isset($_GET['author']))$author=$_POST['username'];
 			else $author=$_GET['author'];
@@ -26,15 +26,22 @@
 			
 			$note=mysqli_query($DBconnection,$statement);
 			$dataRow=mysqli_fetch_array($note,MYSQL_BOTH);
-			
+
+			 
+			//check for uploaded file
+			if(isset($_FILES['fileToUpload'])){
+				include('OCRnoteAdd.php');			
+			}
+			else $savedNotes=$_POST['noteText'];
+
 			if(!$dataRow){//check for existing note page
 				mysqli_free_result($note);
-				$statement="INSERT INTO Notes VALUES('".$_POST['title']."','".$author."','".$_POST['comments']."','".$_POST['noteText']."','".date("r")."','meta stuff');";
+				$statement="INSERT INTO Notes VALUES('".$_POST['title']."','".$author."','".$_POST['comments']."','".$savedNotes."','".date("r")."','meta stuff');";
 				mysqli_query($DBconnection,$statement);
 			}
 			else{
 				mysqli_free_result($note);
-				$statement="UPDATE Notes SET notes='".$_POST['noteText']."', title='".$_POST['title']."', comments='".$_POST['comments']."' WHERE author='".$author."' and title='". $_POST['title']."';";
+				$statement="UPDATE Notes SET notes='".$savedNotes."', title='".$_POST['title']."', comments='".$_POST['comments']."' WHERE author='".$author."' and title='". $_POST['title']."';";
 				mysqli_query($DBconnection,$statement);
 			}
 		}
@@ -77,9 +84,9 @@
 		<!--Saved Notes Tab-->
 		<div role="tabpanel" class="tab-pane  <?php if(isset($_POST["title"]) || isset($_GET["title"])):?>active<?php endif; ?> " id="FileName">
 			<?php if(!isset($_GET['author'])) :?>
-				<form action="index.php?username=<?php include('displayUN.php');?>" method="POST"/>
+				<form action="index.php?username=<?php include('displayUN.php');?>" method="POST" enctype="multipart/form-data"/>
 			<?php else:?>
-				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST"/>
+				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST" enctype="multipart/form-data"/>
 			<?php endif; ?>
 					
 					<h4>Title:<h4>
@@ -87,6 +94,9 @@
 					</br><textarea cols="150" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
 					</br><h4>Comments:<h4>
 					<input type="text" name="comments" value="<?php include('commentDis.php'); ?>"/>
+					<br/>
+					<h4>Upload a picture of some text (must be a .png):<h4>
+					<input type="file" name="fileToUpload" accept="image/png" id="fileToUpload"/>
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 					<br/>	
@@ -97,15 +107,18 @@
 		<!--Blank Page Tab-->
 		<div role="tabpanel" class="tab-pane  <?php if(!isset($_POST["title"]) && !isset($_GET["title"])):?> active <?php endif; ?>"id="BlankPage">
 			<?php if(!isset($_GET['author'])) :?>
-				<form action="index.php?username=<?php include('displayUN.php');?>" method="POST"/>
+				<form action="index.php?username=<?php include('displayUN.php');?>" method="POST"  enctype="multipart/form-data" />
 			<?php else:?>
-				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST"/>
+				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST" enctype="multipart/form-data"/>
 			<?php endif; ?>
 					<h4>Title:<h4>
 					<input type="text" name="title" />
 					</br><textarea cols="150" rows="25" name="noteText"></textarea>
 					</br><h4>Comments:<h4>
 					<input type="text" name="comments"/>
+					<br/>
+					<h4>Upload a picture of some text (must be a .png):<h4>
+					<input type="file" name="fileToUpload" accept="image/png" id="fileToUpload"/>
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 					<br/>	
