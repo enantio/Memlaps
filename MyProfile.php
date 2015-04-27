@@ -44,13 +44,6 @@
 		<h1> Notes</h1>
 		<?php
 			
-		/*	function share($dataRow,$user)
-			{
-				$statement="INSERT INTO Note_Share VALUES ('$dataRow['title']', '$dataRow['author']', '$user)'";
-				mysqli_query($DBconnection,$statement);
-				
-				header("Refresh:0");
-			}*/
 			//display all user's saved notes
 			if($_GET!=NULL){
 			
@@ -115,7 +108,11 @@
 									//temporary
 									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
 									echo $dataRow['title'];
-									echo "</a></td><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+									echo "</a></td><td>";
+									if ($_GET['username'] != $dataRow['author'])
+										echo "<a href='publicProfile.php?username=".$_GET['username']." &user=".$dataRow['author']."'>";
+									else 
+										echo "<a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
 									echo $dataRow['author'];
 									echo "</a></td><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
 									if($dataRow['share_W_user']=="ADMIN")echo "Public";
@@ -181,7 +178,7 @@
 			echo "<tbody>";
 				while($dataRow=mysqli_fetch_array($friends,MYSQL_BOTH)){
 						//temporary
-						echo "<tr><td>";
+						echo "<tr><td><a href = 'publicProfile.php?username=".$_GET['username']." &user=".$dataRow['friend']."'>";
 						echo $dataRow['friend'];
 						echo "</td></tr>";
 				}

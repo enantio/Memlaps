@@ -5,8 +5,11 @@ include('dbConnect.php');
 
  if (isset($_GET['username'])) 
 	 {
-		$statement="INSERT INTO Note_Share VALUES('".$_GET["username"]."','".$_GET['title']."',".$_GET['share']."');";
-		mysqli_query($DBconnection,$statement);
+		 $username = $_GET["username"];
+		 $title = $_GET['title'];
+		 $share = $_GET['share'];
+		$query="INSERT INTO Note_Share VALUES('$username', '$title', '$share')";
+		mysqli_query($DBconnection,$query);
 		
 		$myProfile = "MyProfile.php?username=".$_GET['username'];
 		header('Location: '.$myProfile);
