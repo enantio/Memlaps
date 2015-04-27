@@ -43,11 +43,22 @@
     <div class = "container">
 		<h1> Notes</h1>
 		<?php
+			
+		/*	function share($dataRow,$user)
+			{
+				$statement="INSERT INTO Note_Share VALUES ('$dataRow['title']', '$dataRow['author']', '$user)'";
+				mysqli_query($DBconnection,$statement);
+				
+				header("Refresh:0");
+			}*/
 			//display all user's saved notes
 			if($_GET!=NULL){
 			
 				$statement="select * from Notes where author='". $_GET["username"]."';";
 				$notes=mysqli_query($DBconnection,$statement);
+				
+				$statement="select * from Note_Share where share_W_user='". $_GET["username"]."' OR share_W_user='ADMIN';";
+				$noteshare=mysqli_query($DBconnection,$statement);
 				
 				echo "<h3>Your Notes</h3></br>";
 				if (mysqli_num_rows($notes)==0) { 
@@ -69,12 +80,21 @@
 								echo $dataRow['author'];
 								echo "</a></td><td>";
 								echo $dataRow['last_mod'];
-								echo "</td></tr>";
+								echo "</td>";
+								echo "<td><a href ='deleteNotes.php?username=".$dataRow['author']."&title=".$dataRow['title']."&comments=".$dataRow['comments']."'>delete</a></td>";
+								/*while($dataShare=mysqli_fetch_array($noteshare,MYSQL_BOTH))
+									{	
+										if($dataShare['share_W_user'] =="ADMIN" && $dataRow['title'] == $dataShare['title'])
+											echo "<td><a href ='#'>public</a></td>";	
+								}*/
+								echo "<td><a href ='addShare.php?username=".$dataRow['author']."&title=".$dataRow['title']."&share=ADMIN'>share</a></td>";
+								echo "</tr>";
 						}
 					echo "</tbody>";
 					echo "</table></br>";
 				}
 				mysqli_free_result($notes);	
+				mysqli_free_result($noteshare);	
 				//notes shared with user table
 				$statement="select * from Note_Share where share_W_user='". $_GET["username"]."' OR share_W_user='ADMIN';";
 				$notes=mysqli_query($DBconnection,$statement);
