@@ -1,4 +1,46 @@
-h1{
-    color: red;
+
+body {
+
+    background: url("https://newevolutiondesigns.com/images/freebies/abstract-background-14.jpg") ;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+}
+
+input[type="text"], textarea {
+
+  background-color : #FFFFCC; 
+ 
+
+}
+
+#myTextArea{
+box-sizing:border-box;
+}
+
+
+.THE_BOX {
+	box-sizing:border-box;
+	background-color : #FFFFCC; 
+	
+}
+
+.title {
+color : yellow;
+}
+
+.last{
+color: yellow;
+}
+
+
+.bodyDiv{
+ 
+}
+
+#signInDiv{
+font-family: "Times New Roman", Times, serif;
+text-align: center;
 
 }
