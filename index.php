@@ -63,7 +63,6 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="MyProfile.php?username=<?php include('displayUN.php');?>">My Profile</a></li>
-                        <li><a href="#">My Files</a></li>
                         <li><a href="index.php">Logout</a></li>
                     </ul>
 				 <?php else :?> 
@@ -123,10 +122,7 @@
 				</form>
 		</div>
 	
-		<!--Tutorial Tab-->
-		<div role="tabpanel" class="tab-pane" id="Tutorial">
-			<h3>Tutorial</h3>
-		</div>
+	
 		
 	</div>
 	
