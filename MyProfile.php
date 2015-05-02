@@ -37,8 +37,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="MyProfile.php?username=<?php echo $_GET['username']; ?>">My Profile</a></li>
-                        <li><a href="#">My Files</a></li>
-                        <li><a href="index.php">Logout</a></li>  <!--Returns you to initial blank index page-->
+                        <li><a href="index.php?signout=true">Logout</a></li>  <!--Returns you to initial blank index page-->
                     </ul>
             </ul>
 
