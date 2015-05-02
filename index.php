@@ -88,9 +88,16 @@
 				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST" enctype="multipart/form-data"/>
 			<?php endif; ?>
 					
-					<h4>Title:<h4>
+					<div class="title">
+					<h2>Title:</h2>
+					</div>
 					<input type="text" name="title" value="<?php include('titleDis.php'); ?>"/>
-					</br><textarea cols="186" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
+					<br/>
+						<br/>
+					<div class="THE_BOX">
+						<textarea id="myTextArea" cols="186" rows="25" name="noteText"></textarea>
+					</div>
+					<div class="last">				
 					</br><h4>Comments:<h4>
 					<input type="text" name="comments" value="<?php include('commentDis.php'); ?>"/>
 					<br/>
@@ -99,6 +106,7 @@
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 					<br/>	
+					</div>
 					<input type="submit" value="Save"/>
 				</form>
 		</div>
@@ -112,10 +120,12 @@
 			<?php endif; ?>
 					
 					<div class="title">
-						<h4>Title:<h4>
+						<h2>Title:</h2>
+					</div>
 						<input type="text" name="title" />
 						<br/>
-					</div>
+						<br/>
+					
 
 					<div class="THE_BOX">
 						<textarea id="myTextArea" cols="186" rows="25" name="noteText"></textarea>
@@ -147,4 +157,3 @@
 
     
 </html>
-
