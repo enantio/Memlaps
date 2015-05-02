@@ -13,6 +13,8 @@
 			$passHash=crypt($_POST['password'],$salt);//get password hash
 			$query="INSERT INTO User_Info VALUES('".$_POST['username']."','".$_POST['email']."','".$_POST['name']."','".$passHash."');";
 			mysqli_query($DBconnection,$query);//create account
+			session_start();
+			$_SESSION["UserCheck"]=1;
 			$redirect="Location: index.php?username=".$_POST['username'];
 			header($redirect);//this function must execute before any html
 		}
