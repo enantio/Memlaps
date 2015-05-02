@@ -29,8 +29,9 @@
 		<script src="js/bootstrap.min.js"></script>
 	</head>
 	<body>
-        <div class = "container">
-			<h3>Sign In</h3>
+        <div id="signInDiv" class = "container">
+			<h1>Welcome to MemLapse!<br><br>Sign in?<br></h1>
+			
 			<?php if($error===1)://error message for incorrect login info ?>
 				<h4>Incorrect username or password</h4>
 			<?php endif; ?>
@@ -41,7 +42,7 @@
 				<div class = "form-group">
 					<input type="password" name="password" placeholder="Password"/>
 				</div>
-				<button type="submit" class="btn btn-default btn-sm">Sign In</button>
+				<button type="submit" class="btn btn-default btn-sm">Begin</button>
 				
 			</form>
 		</div>
