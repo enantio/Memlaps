@@ -1,5 +1,9 @@
 <?php
 	session_start();
+	if(isset($_GET["signout"])){
+		session_unset();
+		session_destroy();
+	}
 	if(empty($_SESSION["UserCheck"]))
 		header("Location: memlapsSignIn.php");
 ?>
@@ -71,7 +75,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="MyProfile.php?username=<?php include('displayUN.php');?>">My Profile</a></li>
-                        <li><a href="index.php">Logout</a></li>
+                        <li><a href="index.php?signout=true">Logout</a></li>
                     </ul>
 				 <?php else :?> 
 					<li><a href = "memlapsSignIn.php" >Sign In</a></li>
