@@ -9,6 +9,8 @@
 		//if account exists and password is correct
 		if($dataRow!==NULL && $dataRow['password_hash']===crypt($_POST['password'],$dataRow['password_hash'])){
 			mysqli_free_result($UserInfo);
+			session_start();
+			$_SESSION["UserCheck"]=1;
 			$redirect="Location: index.php?username=".$_POST['username'];
 			header($redirect);//this function must be executed before any html
 		}
