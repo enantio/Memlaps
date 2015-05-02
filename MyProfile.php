@@ -1,3 +1,8 @@
+<?php
+	session_start();
+	if(empty($_SESSION["UserCheck"]))
+		header("Location: memlapsSignIn.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
