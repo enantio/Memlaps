@@ -45,6 +45,11 @@
 				<button type="submit" class="btn btn-default btn-sm">Begin</button>
 				
 			</form>
+		
+		<div>
+			<h3><br><br>Not a Member?</h3>
+			<a href="memlapsSignUp.php">Create an Account</a>
+		</div>
 		</div>
 		
 	</body>
