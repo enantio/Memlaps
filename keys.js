@@ -21,7 +21,15 @@ function multiKeys(e){
     
 /*CTRL + S save macro with title*/
 if(map[17] && map[83]){ // ctrl+s = save	
-	if ($('#entitled').val() === ""){
+	checkTitleAndSave();
+    e.preventDefault();
+    return false;
+}
+
+}//end multiKeys(e)
+
+function checkTitleAndSave(){
+if ($('#entitled').val() === ""){
 		var title = prompt("Give this note a title", "");
         if (title === ""){
 			//do not save;
@@ -31,11 +39,5 @@ if(map[17] && map[83]){ // ctrl+s = save
 			$('#entitled').val(title);
 			$('form').submit();
 		}
-	}  
-    e.preventDefault();
-    return false;
+	} 
 }
-
-}//end multiKeys(e)
-
-
