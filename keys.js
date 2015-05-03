@@ -29,7 +29,7 @@ if(map[17] && map[83]){ // ctrl+s = save
 		}
         else {
 			$('#entitled').val(title);
-			//$('form').submit();
+			$('form').submit();
 		}
 	}  
     e.preventDefault();
