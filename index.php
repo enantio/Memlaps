@@ -158,9 +158,13 @@
 				</form>
 		</div>
 	
-	
-		
 	</div>
+	
+	<!--keys.js-->
+   <script type='text/javascript' src='keys.js'></script>
+   
+	<!--clicks.js-->
+   <script type='text/javascript' src='clicks.js'></script>
 	
   </body>
 
