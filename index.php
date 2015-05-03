@@ -11,8 +11,8 @@
 <html>
   <head>
     <title> Memlaps </title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
     <!--nicedit-->
     <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
@@ -52,16 +52,13 @@
 			}
 		}
     ?>
-    <!--Navigation Bar -->
-	<div class ="navbar navbar-inverse navbar-static-top"> 
+	<div class ="navbar navbar-inverse navbar-static-top"> <!--Navigation Bar -->
 		<div class = "container" role = "tabpanel">
             
             <ul class=" nav navbar-nav" role = "tablist">
-				 <!--Creates a Blank Page. If it's save it is sent to another tab--> 
-			    <li role="presentation" <?php if(!isset($_POST["title"]) && !isset($_GET["title"])):?> class = "active" <?php endif; ?>  ><a href = "#BlankPage"  aria-controls="BlankPage" role="tab" data-toggle="tab">Blank Page</a></li> 
-               
-                <!--If a file is opened it creates a new tab-->
-                <?php if(isset($_POST["title"]) || isset($_GET["title"]))  :?><li role="presentation" class = "active"><a href="#FileName"  aria-controls="FileName" role="tab" data-toggle="tab"><?php include('titleDis.php'); ?></a></li>
+			    <li role="presentation" <?php if(!isset($_POST["title"]) && !isset($_GET["title"])):?> class = "active" <?php endif; ?>  ><a href = "#BlankPage"  aria-controls="BlankPage" role="tab" data-toggle="tab">Blank Page</a></li>  <!--Creates a Blank Page. If it's save it is sent to another tab--> 
+				<li role="presentation"><a href="#Tutorial"  aria-controls="Tutorial" role="tab" data-toggle="tab"> Tutorial</a></li> 
+                <?php if(isset($_POST["title"]) || isset($_GET["title"]))  :?><li role="presentation" class = "active"><a href="#FileName"  aria-controls="FileName" role="tab" data-toggle="tab"><?php include('titleDis.php'); ?></a></li> <!--If a file is opened it creates a new tab-->
 				<?php endif; ?> 
 			</ul> 
 	
@@ -75,6 +72,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="MyProfile.php?username=<?php include('displayUN.php');?>">My Profile</a></li>
+                        <li><a href="#">My Files</a></li>
                         <li><a href="index.php?signout=true">Logout</a></li>
                     </ul>
 				 <?php else :?> 
@@ -87,7 +85,7 @@
 			</div>
 		</div>
    
-   <div class = "tab-content container" id="bodyDiv">
+   <div class = "tab-content container" >
    
 		<!--Saved Notes Tab-->
 		<div role="tabpanel" class="tab-pane  <?php if(isset($_POST["title"]) || isset($_GET["title"])):?>active<?php endif; ?> " id="FileName">
@@ -97,16 +95,9 @@
 				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST" enctype="multipart/form-data"/>
 			<?php endif; ?>
 					
-					<div class="title">
-					<h2>Title:</h2>
-					</div>
+					<h4>Title:<h4>
 					<input type="text" name="title" value="<?php include('titleDis.php'); ?>"/>
-					<br/>
-						<br/>
-					<div class="THE_BOX">
-						<textarea id="myTextArea" cols="186" rows="25" name="noteText"></textarea>
-					</div>
-					<div class="last">				
+					</br><textarea cols="150" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
 					</br><h4>Comments:<h4>
 					<input type="text" name="comments" value="<?php include('commentDis.php'); ?>"/>
 					<br/>
@@ -115,8 +106,7 @@
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 					<br/>	
-					</div>
-					<input type="submit" value="Save"/>
+					<input type="submit" value="save"/>
 				</form>
 		</div>
 		
@@ -127,44 +117,27 @@
 			<?php else:?>
 				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST" enctype="multipart/form-data"/>
 			<?php endif; ?>
-					
-					<div class="title">
-						<h2>Title:</h2>
-					</div>
-						<input type="text" name="title" />
-						<br/>
-						<br/>
-					
-
-					<div class="THE_BOX">
-						<textarea id="myTextArea" cols="186" rows="25" name="noteText"></textarea>
-					</div>
-						
-					<div class="last">				
-					</br>
-					<h4>Comments:<h4>
+					<h4>Title:<h4>
+					<input type="text" name="title" />
+					</br><textarea cols="150" rows="25" name="noteText"></textarea>
+					</br><h4>Comments:<h4>
 					<input type="text" name="comments"/>
 					<br/>
-					
-					
-					<h4>Upload a picture of text (must be a .png):<h4>
+					<h4>Upload a picture of some text (must be a .png):<h4>
 					<input type="file" name="fileToUpload" accept="image/png" id="fileToUpload"/>
 					<br/>
-					
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 					<br/>	
-					</div>
-					<input type="submit" value="Save"/>
+					<input type="submit" value="save"/>
 				</form>
 		</div>
 	
+		<!--Tutorial Tab-->
+		<div role="tabpanel" class="tab-pane" id="Tutorial">
+			<h3>Tutorial</h3>
+		</div>
+		
 	</div>
-	
-	<!--keys.js-->
-   <script type='text/javascript' src='keys.js'></script>
-   
-	<!--clicks.js-->
-   <script type='text/javascript' src='clicks.js'></script>
 	
   </body>
 
