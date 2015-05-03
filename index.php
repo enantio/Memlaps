@@ -97,7 +97,7 @@
 					
 					<h4>Title:<h4>
 					<input type="text" name="title" value="<?php include('titleDis.php'); ?>"/>
-					</br><textarea cols="150" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
+					</br><textarea cols="186" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
 					</br><h4>Comments:<h4>
 					<input type="text" name="comments" value="<?php include('commentDis.php'); ?>"/>
 					<br/>
@@ -119,7 +119,8 @@
 			<?php endif; ?>
 					<h4>Title:<h4>
 					<input type="text" name="title" />
-					</br><textarea cols="150" rows="25" name="noteText"></textarea>
+					<br/>
+					</br><textarea cols="186" rows="25" name="noteText"></textarea>
 					</br><h4>Comments:<h4>
 					<input type="text" name="comments"/>
 					<br/>
@@ -128,17 +129,15 @@
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 					<br/>	
-					<input type="submit" value="save"/>
+					<input type="button" value="Save" onclick="checkTitleAndSave()">
 				</form>
-		</div>
-	
-		<!--Tutorial Tab-->
-		<div role="tabpanel" class="tab-pane" id="Tutorial">
-			<h3>Tutorial</h3>
 		</div>
 		
 	</div>
-	
+
+	<!--keys.js-->
+   <script type='text/javascript' src='keys.js'></script>
+   
   </body>
 
     
