@@ -22,6 +22,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
     <script src="js/bootstrap.js"></script>
 
+	<!--search script-->
+	<script src="js/searchJava.js"></script>
     
   </head>
   <body>
@@ -63,6 +65,35 @@
 	
 			
             <ul class=" nav navbar-nav navbar-right">
+			
+			<li>
+				<form class="navbar-form" action ="searchPage.php"> <!--Search Bar-->
+						<div class="form-group" style="display:inline;">
+							<div class="input-group"> 
+								<div class="input-group-btn search-panel">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+										<span id="search_concept">All</span> <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#Notes">Notes</a></li>
+										<li><a href="#Users">Users</a></li>
+										<li class="divider"></li>
+										<li><a href="#All">All</a></li>
+									</ul>
+									<input type="hidden" name="search_param" value="All" id="search_param">   
+									<input type="hidden" name="username" value="<?php include('displayUN.php');?>">   
+								</div>
+								
+								<input type="text" name ="search"class="form-control" placeholder="Search">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+								</span>
+							</div>
+						</div>
+					</form>
+				</li>
+			
+			
               <?php if(isset($_POST["username"]) || isset($_GET["username"])) : ?>  <!--Checks to see if signed in-->
 					<li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -77,6 +108,7 @@
 					<li><a href = "memlapsSignIn.php" >Sign In</a></li>
 					<li><a href ="memlapsSignUp.php">Sign Up</a></li>
 				 <?php endif; ?> 
+				 </li>
 				
              </ul>
 	
@@ -104,7 +136,7 @@
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 					<br/>	
-					<input type="submit" value="save"/>
+					<input type="submit" value="Save"/>
 				</form>
 		</div>
 		
@@ -127,7 +159,7 @@
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 					<br/>	
-					<input type="button" value="Save" onclick="checkTitleAndSave()">
+					<input type="submit" value="Save"/>
 				</form>
 		</div>
 		
