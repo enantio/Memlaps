@@ -24,6 +24,13 @@
 
 	<!--search script-->
 	<script src="js/searchJava.js"></script>
+	
+	<!--tab.js-->
+   <script src="tab.js"></script>
+   
+   <!--bgroundClasses.js-->
+   <script src="bgroundClasses.js"></script>
+   
     
   </head>
   <body>
@@ -126,8 +133,8 @@
 			<?php endif; ?>
 					
 					<h4>Title:<h4>
-					<input type="text" name="title" value="<?php include('titleDis.php'); ?>"/>
-					</br><textarea cols="186" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
+					<input type="text" id="entitled" name="title" value="<?php include('titleDis.php'); ?>"/>
+					</br><textarea id="THE_BOX cols="186" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
 					</br><h4>Comments:<h4>
 					<input type="text" name="comments" value="<?php include('commentDis.php'); ?>"/>
 					<br/>
@@ -136,7 +143,7 @@
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 					<br/>	
-					<input type="submit" value="Save"/>
+					<input type="button" value="Save" onclick="checkTitleAndSave()">
 				</form>
 		</div>
 		
@@ -148,9 +155,9 @@
 				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST" enctype="multipart/form-data"/>
 			<?php endif; ?>
 					<h4>Title:<h4>
-					<input type="text" name="title" />
+					<input id="entitled" type="text" name="title" />
 					<br/>
-					</br><textarea cols="186" rows="25" name="noteText"></textarea>
+					</br><textarea id="THE_BOX" cols="186" rows="25" name="noteText"></textarea>
 					</br><h4>Comments:<h4>
 					<input type="text" name="comments"/>
 					<br/>
@@ -159,16 +166,21 @@
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 					<br/>	
-					<input type="submit" value="Save"/>
+					<input type="button" value="Save" onclick="checkTitleAndSave()">
 				</form>
 		</div>
 		
 	</div>
+	
+	<div id="infoBox">
+		
+	<h4> Keyboard Macros:</h4><p>1. Save = CTRL + s<br/>2. Change Background = CTRL + 0-9<br/>3. Change Editor Background = CTRL + q</p>
+	</div>
 
-	<!--keys.js-->
-   <script type='text/javascript' src='keys.js'></script>
+	
    
   </body>
 
     
 </html>
+
