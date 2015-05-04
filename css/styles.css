@@ -1,6 +1,23 @@
 
-body {
+#infoBox{
+color: red;
+float: right;
+display: inline;
+right: 0px;
+width: 300px;
+}
 
+.bground9{
+position: center;
+background: url(http://arsgrafik.s3.amazonaws.com/uploads/2010/03/cool-backgrounds-night-glow.jpg);
+background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+}
+
+.bground1{
+position: center;
     background: url("https://newevolutiondesigns.com/images/freebies/abstract-background-14.jpg") ;
 	background-repeat: no-repeat;
     background-attachment: fixed;
@@ -8,36 +25,129 @@ body {
     background-size: cover;
 }
 
+.bground0{
+position: center;
+    background: url("http://www.vuleticsm.com/images/background.jpg") ;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+}
+
+
+.bground2{
+position: center;
+background: url(http://www.stephenbrooks.org/ss/matrix/matrixss.png);
+background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+}
+
+.bground3{
+position: center;
+background: url(http://juliewight.com/wp-content/uploads/2013/11/abstract-website-backgrounds.jpg);
+background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+}
+
+.bground4{
+position: center;
+background: url(http://www.andiherzog.com/wp-content/uploads/2014/06/Top-10-best-Simple-Awesome-Background-Images-for-Your-Website-or-Blog3.jpg);
+background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+}
+
+.bground5{
+position: center;
+background: url(http://wallpapers.ae/wp-content/uploads/2015/02/Stylish-Pattern-Abstract-Background-Wallpapers.jpg);
+background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+}
+
+.bground6{
+position: center;
+background: url(http://fondosblackberry.com/user-content/uploads/wall/o/15/cool_background_abstract_.jpg);
+background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+}
+
+.bground7{
+position: center;
+background: url(http://www.computer-wallpaper-backgrounds.com/wallpaper/1680x1050/backgrounds/fibre-lights-orange.jpg);
+background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+}
+
+.bground8{
+position: center;
+background: url(http://www.merredin-show.com.au/wp-content/uploads/2013/09/Dark-wooden-website-background.jpg);
+background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+}
+
+
+
+
+.tground0{
+     background-color: #FFFFCC;
+}
+
+.tground1{
+	background-color: #525229;
+}
+
+
+body {
+   position: center;
+}
+
+.tab-pane{
+position: center;
+width: 100%;
+}
+
+textarea{
+	display: block;
+    margin-left: auto;
+    margin-right: auto; 
+	width: 100%;
+}
+
+
+#BlankPage{
+margin-left: auto;
+margin-right: auto;
+}
+
+#FileName{
+margin-left: auto;
+margin-right: auto;
+}
+
 input[type="text"], textarea {
-
-  background-color : #FFFFCC; 
- 
-
-}
-
-#myTextArea{
-box-sizing:border-box;
+background-color : #FFFFCC; 
 }
 
 
-.THE_BOX {
-	box-sizing:border-box;
-	background-color : #FFFFCC; 
-	
-}
 
 .title {
 color : yellow;
 }
 
-.last{
-color: yellow;
-}
 
-
-.bodyDiv{
- 
-}
 
 #signInDiv{
 font-family: "Times New Roman", Times, serif;
