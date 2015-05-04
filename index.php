@@ -57,8 +57,7 @@
             
             <ul class=" nav navbar-nav" role = "tablist">
 			    <li role="presentation" <?php if(!isset($_POST["title"]) && !isset($_GET["title"])):?> class = "active" <?php endif; ?>  ><a href = "#BlankPage"  aria-controls="BlankPage" role="tab" data-toggle="tab">Blank Page</a></li>  <!--Creates a Blank Page. If it's save it is sent to another tab--> 
-				<li role="presentation"><a href="#Tutorial"  aria-controls="Tutorial" role="tab" data-toggle="tab"> Tutorial</a></li> 
-                <?php if(isset($_POST["title"]) || isset($_GET["title"]))  :?><li role="presentation" class = "active"><a href="#FileName"  aria-controls="FileName" role="tab" data-toggle="tab"><?php include('titleDis.php'); ?></a></li> <!--If a file is opened it creates a new tab-->
+                <?php if	(isset($_POST["title"]) || isset($_GET["title"]))  :?><li role="presentation" class = "active"><a href="#FileName"  aria-controls="FileName" role="tab" data-toggle="tab"><?php include('titleDis.php'); ?></a></li> <!--If a file is opened it creates a new tab-->
 				<?php endif; ?> 
 			</ul> 
 	
@@ -72,7 +71,6 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="MyProfile.php?username=<?php include('displayUN.php');?>">My Profile</a></li>
-                        <li><a href="#">My Files</a></li>
                         <li><a href="index.php?signout=true">Logout</a></li>
                     </ul>
 				 <?php else :?> 
