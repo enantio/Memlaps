@@ -1,7 +1,12 @@
 <?php
 	session_start();
+	
 	if(empty($_SESSION["UserCheck"]))
 		header("Location: memlapsSignIn.php");
+	if(isset($_POST["username"]) && $_POST["username"]!=$_SESSION['name'])
+		header("Location: index.php?signout=true");
+	if(isset($_GET["username"]) && $_GET["username"]!=$_SESSION['name'])
+		header("Location: index.php?signout=true");
 ?>
 <!DOCTYPE html>
 <html>
