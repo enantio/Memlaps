@@ -1,11 +1,12 @@
 <?php
 	session_start();
-	if(isset($_GET["signout"])){
-		session_unset();
-		session_destroy();
-	}
+
 	if(empty($_SESSION["UserCheck"]))
 		header("Location: memlapsSignIn.php");
+	if(isset($_POST["username"]) && $_POST["username"]!=$_SESSION['name'])
+		header("Location: index.php?signout=true");
+	if(isset($_GET["username"]) && $_GET["username"]!=$_SESSION['name'])
+		header("Location: index.php?signout=true");
 ?>
 
 <!DOCTYPE html>
@@ -94,50 +95,56 @@
 		{
 			if($_GET['search_param'] == 'All')
 			{
-				$search_sql = "select * from Notes where author like '%". $_GET['search']."%' or author like '%". $_GET['search']."%'";
+				$search_sql=$DBconnection->prepare("select * from Notes where author like ? or author like ?;");
+				$search_sql->bind_param('ss',$_GET['search'],$_GET['search']);
 			}
 			else if($_GET['search_param'] == 'Notes')
 			{
-				$search_sql = "select * from Notes where title like '%". $_GET['search']."%'";
+				$search_sql=$DBconnection->prepare("select * from Notes where title like ?;");
+				$search_sql->bind_param('s',$_GET['search']);
 			}
 			else{
-				$search_sql = "select * from Notes where author like '%". $_GET['search']."%'";
+				$search_sql=$DBconnection->prepare("select * from Notes where author like ?;");
+				$search_sql->bind_param('s',$_GET['search']);
 			}
-			$search_query = mysqli_query($DBconnection,$search_sql);
-
-			if(mysqli_num_rows($search_query)==0){
-				echo "<h3>Nothing matches your search</h3>";
-			}
-			else{
+			$search_sql->execute();
+			$search_query=$search_sql->get_result();
+			
 				$i = 0;
 				$array =[];
-				while($search = mysqli_fetch_array($search_query,MYSQL_BOTH))
+				$search = $search_query->fetch_assoc();
+				do
 				{
-					if($_GET['search_param'] == 'All'){
-						if(!in_array($search['author'], $array)){	
-							$array[$i] = $search['author'];
-							$i++;
-						}
-						if(!in_array($search['title'], $array)){	
-							$array[$i] = $search['title'];
-							$i++;
-						}
-					}
-					else if($_GET['search_param'] == 'Notes'){
-						if(!in_array($search['title'], $array)){	
-							$array[$i] = $search['title'];
-							$i++;
-						}
+					if($search==NULL){
+						echo "<h3>Nothing matches your search</h3>";
 					}
 					else{
-						if(!in_array($search['author'], $array)){	
-							$array[$i] = $search['author'];
-							$i++;
+			
+						if($_GET['search_param'] == 'All'){
+							if(!in_array($search['author'], $array)){	
+								$array[$i] = $search['author'];
+								$i++;
+							}
+							if(!in_array($search['title'], $array)){	
+								$array[$i] = $search['title'];
+								$i++;
+							}
 						}
+						else if($_GET['search_param'] == 'Notes'){
+							if(!in_array($search['title'], $array)){	
+								$array[$i] = $search['title'];
+								$i++;
+							}
+						}
+						else{
+							if(!in_array($search['author'], $array)){	
+								$array[$i] = $search['author'];
+								$i++;
+							}
 						
+						}
 					}
-					
-				}
+				}while($search = $search_query->fetch_assoc());
 				natsort($array);
 				for($i = 0; $i <count($array); $i++)
 				{
@@ -145,7 +152,9 @@
 					echo $array[$i];
 					echo "</p>";
 				}
-			}
+	
+		//$search_sql->close();
+		//mysqli_free_result($search);
 		}
 		?>
 	</div>
