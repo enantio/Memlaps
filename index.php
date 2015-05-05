@@ -6,6 +6,10 @@
 	}
 	if(empty($_SESSION["UserCheck"]))
 		header("Location: memlapsSignIn.php");
+	if(isset($_POST["username"]) && $_POST["username"]!=$_SESSION['name'])
+		header("Location: index.php?signout=true");
+	if(isset($_GET["username"]) && $_GET["username"]!=$_SESSION['name'])
+		header("Location: index.php?signout=true");
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,9 +31,8 @@
 	
 	<!--tab.js-->
    <script src="tab.js"></script>
-   
-   <!--bgroundClasses.js-->
-   <script src="bgroundClasses.js"></script>
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
+
    
     
   </head>
@@ -39,25 +42,29 @@
 		if(isset($_POST['noteText'])){
 			if(!isset($_GET['author']))$author=$_POST['username'];
 			else $author=$_GET['author'];
-			$statement="select * from Notes where author='".$author."' and title='". $_POST["title"]."';";
-			
-			$note=mysqli_query($DBconnection,$statement);
-			$dataRow=mysqli_fetch_array($note,MYSQL_BOTH);
-			 
+			$statement=$DBconnection->prepare("SELECT * FROM Notes WHERE author='".$author."' and title= ?;");
+			$statement->bind_param('s',$_POST["title"]);
+			$statement->execute();
+			$note=$statement->get_result();
+			$dataRow=$note->fetch_assoc();
 			//check for uploaded file
 			if(isset($_FILES['fileToUpload'])){
 				include('OCRnoteAdd.php');			
 			}
 			else $savedNotes=$_POST['noteText'];
 			if(!$dataRow){//check for existing note page
-				mysqli_free_result($note);
-				$statement="INSERT INTO Notes VALUES('".$_POST['title']."','".$author."','".$_POST['comments']."','".$savedNotes."','".date("r")."','meta stuff');";
-				mysqli_query($DBconnection,$statement);
+				$statement->close();
+				$statement=$DBconnection->prepare("INSERT INTO Notes VALUES(?,?,?,?,'".date("r")."','meta stuff');");
+				$statement->bind_param('ssss',$_POST['title'],$author,$_POST['comments'],$savedNotes);
+				$statement->execute();
+				$statement->close();
 			}
 			else{
-				mysqli_free_result($note);
-				$statement="UPDATE Notes SET notes='".$savedNotes."', title='".$_POST['title']."', comments='".$_POST['comments']."' WHERE author='".$author."' and title='". $_POST['title']."';";
-				mysqli_query($DBconnection,$statement);
+				$statement->close();
+				$statement=$DBconnection->prepare("UPDATE Notes SET notes=?, title=?, comments=? WHERE author=? and title=?;");
+				$statement->bind_param('sssss',$savedNotes,$_POST['title'],$_POST['comments'],$author,$_POST['title']);
+				$statement->execute();
+				$statement->close();
 			}
 		}
     ?>
@@ -176,11 +183,8 @@
 		
 	<h4> Keyboard Macros:</h4><p>Change Background = CTRL + 0-9<br/>Change Editor Background = CTRL + q</p>
 	</div>
-
 	
    
   </body>
-
     
 </html>
-
