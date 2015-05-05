@@ -19,17 +19,17 @@ window.addEventListener('keyup',
 		},
 false);
 
-
+///////////////////////////////////multiKeys
 function multiKeys(e){
-if(map[17] && map[83]){ // ctrl+s = save	
-	checkTitleAndSave()
-    e.preventDefault();
-    return false;
-	}
+//if(map[17] && map[83]){ // ctrl+s = save	
+	//checkTitleAndSave();
+    //e.preventDefault();
+    //return false;
+	//}
 
 
 /*PAGE BACKGROUND CHANGER*/
-else if(map[17] && map[49]){ // ctrl+1 
+if(map[17] && map[49]){ // ctrl+1 
 	$('body').removeClass();
 	$('body').addClass('bground1');
 	//newBground();
@@ -114,24 +114,8 @@ else if(map[17] && map[81]){ // ctrl+ q
 }//end multiKeys
 
 
-
 });
 
 
 
 
-
-function checkTitleAndSave(){
-if ($('#entitled').val() === ""){
-		var title = prompt("Give this note a title", "");
-        if (title === ""){
-			//do not save;
-			alert("Note was not saved.");
-			
-		}
-        else {
-			$('#entitled').val(title);
-			$('form').submit();
-		}
-	} 
-}
