@@ -3,23 +3,28 @@
 	if($_POST!=NULL){
 		
 		include('dbConnect.php');//check for accounts using the desired email and username
-		$query="select * from User_Info where username='".$_POST['username']."' OR email='".$_POST['email']."';";
-		$UserInfo=mysqli_query($DBconnection,$query);		
-		$dataRow=mysqli_fetch_array($UserInfo,MYSQL_BOTH);
+		$statement=$DBconnection->prepare("select * from User_Info where username=? OR email=?;");
+		$statement->bind_param('ss',$_POST["username"],$_POST['email']);
+		$statement->execute();
+		$note=$statement->get_result();
+		$dataRow=$note->fetch_assoc();
 		
 		if($dataRow===NULL){
-			mysqli_free_result($UserInfo);
+			$statement->close();
 			$salt="$2y$09$".time()."00".time()."$";//create salt
 			$passHash=crypt($_POST['password'],$salt);//get password hash
-			$query="INSERT INTO User_Info VALUES('".$_POST['username']."','".$_POST['email']."','".$_POST['name']."','".$passHash."');";
-			mysqli_query($DBconnection,$query);//create account
+			$statement=$DBconnection->prepare("INSERT INTO User_Info VALUES(?,?,?,?);");
+			$statement->bind_param('ssss',$_POST['username'],$_POST['email'],$_POST['name'],$passHash);
+			$statement->execute();
+			$statement->close();
+			$redirect="Location: index.php?username=".$_POST['username'];
 			session_start();
 			$_SESSION["UserCheck"]=1;
-			$redirect="Location: index.php?username=".$_POST['username'];
+			$_SESSION["name"]=$_POST['username'];
 			header($redirect);//this function must execute before any html
 		}
 		else{
-			mysqli_free_result($UserInfo);
+			//mysqli_free_result($UserInfo);
 			$error=1;
 		}
 	}
