@@ -3,19 +3,22 @@
 	if($_POST!=NULL){//check sign in info
 		
 		include('dbConnect.php');
-		$query="select * from User_Info where username='".$_POST['username']."';";
-		$UserInfo=mysqli_query($DBconnection,$query);		
-		$dataRow=mysqli_fetch_array($UserInfo,MYSQL_BOTH);
+		$statement=$DBconnection->prepare("select * from User_Info where username=?;");
+		$statement->bind_param('s',$_POST["username"]);
+		$statement->execute();
+		$note=$statement->get_result();
+		$dataRow=$note->fetch_assoc();
 		//if account exists and password is correct
 		if($dataRow!==NULL && $dataRow['password_hash']===crypt($_POST['password'],$dataRow['password_hash'])){
-			mysqli_free_result($UserInfo);
+			$statement->close();
 			session_start();
 			$_SESSION["UserCheck"]=1;
+			$_SESSION["name"]=$_POST['username'];
 			$redirect="Location: index.php?username=".$_POST['username'];
 			header($redirect);//this function must be executed before any html
 		}
 		else{
-			mysqli_free_result($UserInfo);
+			//mysqli_free_result($UserInfo);
 			$error=1;
 		}
 	}
@@ -32,7 +35,7 @@
 	</head>
 	<body>
         <div id="signInDiv" class = "container">
-			<h1>Welcome to MemLapse!<br><br>Sign in?<br></h1>
+			<h1>Welcome to MemLaps!<br><br>Sign in?<br></h1>
 			
 			<?php if($error===1)://error message for incorrect login info ?>
 				<h4>Incorrect username or password</h4>
@@ -47,12 +50,8 @@
 				<button type="submit" class="btn btn-default btn-sm">Begin</button>
 				
 			</form>
-		
-		<div>
-			<h3><br><br>Not a Member?</h3>
-			<a href="memlapsSignUp.php">Create an Account</a>
+			<p>Not a member? Click Below to sign up.</p>
+			<a href="memlapsSignUp.php"><div>Sign Up</div></a>
 		</div>
-		</div>
-		
 	</body>
 </html>
