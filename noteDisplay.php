@@ -1,18 +1,22 @@
 <?php 
 	 if(isset($_GET['title'])){
-		if(!isset($_GET['author']))$statement="select notes from Notes where author='". $_GET['username']."' and title='".$_GET['title']."';";
-		else $statement="select notes from Notes where author='". $_GET['author']."' and title='". $_GET['title']."';";
-		$note=mysqli_query($DBconnection,$statement);
-		$dataRow=mysqli_fetch_array($note,MYSQL_BOTH);
+		$statement=$DBconnection->prepare("select notes from Notes where author=? and title=?;");
+		if(!isset($_GET['author']))$statement->bind_param('ss', $_GET['username'],$_GET['title']);
+		else $statement->bind_param('ss', $_GET['author'],$_GET['title']);
+		$statement->execute();
+		$note=$statement->get_result();
+		$dataRow=$note->fetch_assoc();
 		echo $dataRow['notes'];
-		mysqli_free_result($note);
+		$statement->close();
 	 }
 	 elseif(isset($_POST['title'])){
-		if(!isset($_GET['author']))$statement="select notes from Notes where author='". $_GET['username']."' and title='".$_POST['title']."';";	
-		else $statement="select notes from Notes where author='". $_GET['author']."' and title='". $_POST['title']."';";
-		$note=mysqli_query($DBconnection,$statement);
-		$dataRow=mysqli_fetch_array($note,MYSQL_BOTH);
+		 $statement=$DBconnection->prepare("select notes from Notes where author=? and title=?;");
+		if(!isset($_GET['author']))$statement->bind_param('ss', $_GET['username'],$_POST['title']);
+		else $statement->bind_param('ss', $_GET['author'],$_POST['title']);
+		$statement->execute();
+		$note=$statement->get_result();
+		$dataRow=$note->fetch_assoc();
 		echo $dataRow['notes'];
-		mysqli_free_result($note);
+		$statement->close();
 	}
 ?>
