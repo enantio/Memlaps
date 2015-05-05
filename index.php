@@ -174,7 +174,7 @@
 	
 	<div id="infoBox">
 		
-	<h4> Keyboard Macros:</h4><p>1. Save = CTRL + s<br/>2. Change Background = CTRL + 0-9<br/>3. Change Editor Background = CTRL + q</p>
+	<h4> Keyboard Macros:</h4><p>Change Background = CTRL + 0-9<br/>Change Editor Background = CTRL + q</p>
 	</div>
 
 	
