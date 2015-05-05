@@ -143,7 +143,7 @@
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 					<br/>	
-					<input type="button" value="Save" onclick="checkTitleAndSave()">
+					<input type="submit" value="Save"/>
 				</form>
 		</div>
 		
@@ -166,7 +166,7 @@
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 					<br/>	
-					<input type="button" value="Save" onclick="checkTitleAndSave()">
+					<input type="submit" value="Save"/>
 				</form>
 		</div>
 		
