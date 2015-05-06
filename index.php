@@ -26,14 +26,12 @@
 	<!--search script-->
 	<script src="js/searchJava.js"></script>
 	
-	<!--tab.js
-   <script src="tab.js"></script>-->
-   
-   
+	<!--tab.js-->
+   <script src="tab.js"></script>
    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
    
-   <!--bgroundClasses.js-->
-   <script src="bgroundClasses.js"></script>
+   
+
    
    
    
@@ -68,8 +66,9 @@
 		}
     ?>
 	<div class ="navbar navbar-inverse navbar-static-top"> <!--Navigation Bar -->
+
 		<div class = "container" role = "tabpanel">
-            
+		<h1 id="front">Memlaps</h1>		 
             <ul class=" nav navbar-nav" role = "tablist">
 			    <li role="presentation" <?php if(!isset($_POST["title"]) && !isset($_GET["title"])):?> class = "active" <?php endif; ?>  ><a href = "#BlankPage"  aria-controls="BlankPage" role="tab" data-toggle="tab">Blank Page</a></li>  <!--Creates a Blank Page. If it's save it is sent to another tab--> 
                 <?php if	(isset($_POST["title"]) || isset($_GET["title"]))  :?><li role="presentation" class = "active"><a href="#FileName"  aria-controls="FileName" role="tab" data-toggle="tab"><?php include('titleDis.php'); ?></a></li> <!--If a file is opened it creates a new tab-->
@@ -139,10 +138,10 @@
 			<?php endif; ?>
 					
 					<h4>Title:<h4>
-					<input type="text" id="entitled" name="title" value="<?php include('titleDis.php'); ?>"/>
+					<input type="text" class="entitled" name="title" value="<?php include('titleDis.php'); ?>"/>
 					</br><textarea id="THE_BOX cols="186" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
 					</br><h4>Comments:<h4>
-					<input type="text" name="comments" value="<?php include('commentDis.php'); ?>"/>
+					<input type="text" name="comments" style="width: 650px;" value="<?php include('commentDis.php'); ?>"/>
 					<br/>
 					<h4>Upload a picture of some text (must be a .png):<h4>
 					<input type="file" name="fileToUpload" accept="image/png" id="fileToUpload"/>
@@ -161,18 +160,18 @@
 				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST" enctype="multipart/form-data"/>
 			<?php endif; ?>
 					<h4>Title:<h4>
-					<input id="entitled" type="text" name="title" />
+					<input class="entitled" type="text" name="title"/>
 					<br/>
 					</br><textarea id="THE_BOX" cols="186" rows="25" name="noteText"></textarea>
 					</br><h4>Comments:<h4>
-					<input type="text" name="comments"/>
+					<input type="text" name="comments" style="width: 650px;"/>
 					<br/>
 					<h4>Upload a picture of some text (must be a .png):<h4>
 					<input type="file" name="fileToUpload" accept="image/png" id="fileToUpload"/>
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
 					<br/>	
-					<input type="submit" value="Save"/>
+					<input type="submit" value="Save" />
 	
 	
 				</form>
@@ -182,7 +181,7 @@
 	
 	<div id="infoBox">
 		
-	<h4> Keyboard Macros:</h4><p>1. Save = CTRL + s<br/>2. Change Background = CTRL + 0-9<br/>3. Change Editor Background = CTRL + q</p>
+	<h4> Keyboard Macros:</h4><p>2. CTRL + 0-9 = Change Background<br/>3. CTRL + e = Change Editor Background</p>
 	</div>
 
 
@@ -192,4 +191,3 @@
 
     
 </html>
-
