@@ -41,15 +41,13 @@
 							<div class="input-group"> 
 								<div class="input-group-btn search-panel">
 									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-										<span id="search_concept">All</span> <span class="caret"></span>
+										<span id="search_concept">Notes</span> <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu" role="menu">
 										<li><a href="#Notes">Notes</a></li>
 										<li><a href="#Users">Users</a></li>
-										<li class="divider"></li>
-										<li><a href="#All">All</a></li>
 									</ul>
-									<input type="hidden" name="search_param" value="All" id="search_param">
+									<input type="hidden" name="search_param" value="Notes" id="search_param">
 									<input type="hidden" name="username" value="<?php include('displayUN.php');?>">   
 								</div>
 								
@@ -93,66 +91,54 @@
 			echo "<h3>Nothing matches your search</h3>";
 		else if(isset($_GET['search']))
 		{
-			if($_GET['search_param'] == 'All')
-			{
-				$search_sql=$DBconnection->prepare("select * from Notes where author like ? or author like ?;");
-				$search_sql->bind_param('ss',$_GET['search'],$_GET['search']);
-			}
-			else if($_GET['search_param'] == 'Notes')
-			{
-				$search_sql=$DBconnection->prepare("select * from Notes where title like ?;");
-				$search_sql->bind_param('s',$_GET['search']);
+			if($_GET['search_param'] == 'Notes'){
+				$title = "%".$_GET['search']."%";
+				$search_sql=$DBconnection->prepare("select * from Note_Share where share_W_user='ADMIN' AND title like ? order by title;");
+				$search_sql->bind_param('s',$title);
 			}
 			else{
-				$search_sql=$DBconnection->prepare("select * from Notes where author like ?;");
-				$search_sql->bind_param('s',$_GET['search']);
+				$user = "%".$_GET['search']."%";
+				$search_sql=$DBconnection->prepare("select * from User_Info where username like ?;");
+				$search_sql->bind_param('s',$user);
 			}
 			$search_sql->execute();
 			$search_query=$search_sql->get_result();
 			
-				$i = 0;
-				$array =[];
-				$search = $search_query->fetch_assoc();
-				do
-				{
-					if($search==NULL){
-						echo "<h3>Nothing matches your search</h3>";
-					}
-					else{
-			
-						if($_GET['search_param'] == 'All'){
-							if(!in_array($search['author'], $array)){	
-								$array[$i] = $search['author'];
-								$i++;
-							}
-							if(!in_array($search['title'], $array)){	
-								$array[$i] = $search['title'];
-								$i++;
-							}
-						}
-						else if($_GET['search_param'] == 'Notes'){
-							if(!in_array($search['title'], $array)){	
-								$array[$i] = $search['title'];
-								$i++;
-							}
-						}
-						else{
-							if(!in_array($search['author'], $array)){	
-								$array[$i] = $search['author'];
-								$i++;
-							}
-						
-						}
-					}
-				}while($search = $search_query->fetch_assoc());
-				natsort($array);
-				for($i = 0; $i <count($array); $i++)
-				{
-					echo "<p>";
-					echo $array[$i];
-					echo "</p>";
+			$i = 0;
+			$array =[];
+			$author = [];
+			while($search = mysqli_fetch_array($search_query,MYSQL_BOTH))
+			{
+				if($search==NULL){
+					echo "<h3>Nothing matches your search</h3>";
+					break;
 				}
-	
+			
+				if($_GET['search_param'] == 'Notes'){
+					if(!in_array($search['title'], $array)){	
+						$array[$i] = $search['title'];
+						$author[$i] = $search['author'];
+						$i++;
+					}
+				}
+				else{
+					if(!in_array($search['username'], $array)){	
+						$array[$i] = $search['username'];
+						$i++;
+					}
+			
+				}
+			}
+			for($i = 0; $i <count($array); $i++)
+			{
+				echo "<p>";
+				if($_GET['search_param'] == 'Notes')
+					echo "<a href ='index.php?username=".$_GET['username']."&author=".$author[$i]."&title=".$array[$i]."'>";
+				else 
+					echo "<a href ='publicProfile.php?username=".$_GET['username']." &user=".$array[$i]."'>";
+				echo $array[$i];
+				echo "</a></p>";
+			}
 		//$search_sql->close();
 		//mysqli_free_result($search);
 		}

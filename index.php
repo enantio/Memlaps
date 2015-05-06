@@ -86,15 +86,13 @@
 							<div class="input-group"> 
 								<div class="input-group-btn search-panel">
 									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-										<span id="search_concept">All</span> <span class="caret"></span>
+										<span id="search_concept">Notes</span> <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu" role="menu">
 										<li><a href="#Notes">Notes</a></li>
 										<li><a href="#Users">Users</a></li>
-										<li class="divider"></li>
-										<li><a href="#All">All</a></li>
 									</ul>
-									<input type="hidden" name="search_param" value="All" id="search_param">   
+									<input type="hidden" name="search_param" value="Notes" id="search_param">   
 									<input type="hidden" name="username" value="<?php include('displayUN.php');?>">   
 								</div>
 								

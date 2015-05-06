@@ -157,6 +157,7 @@
 									echo "</a></td><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
 									if($dataRow['share_W_user']=="ADMIN")echo "Public";
 									else echo $dataRow['share_W_user'];
+									echo "</td><td><a href ='removeShare.php?username=".$dataRow['author']."&title=".$dataRow['title']."'>unshare</a></td>";
 									echo "</a></td></tr>";
 							}
 						echo "</tbody>";
