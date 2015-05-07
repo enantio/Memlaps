@@ -145,7 +145,7 @@
 					} );
 					</script>
 					<br/><h4>Comments:</h4>
-					<input type="text" name="comments" style="width: 650px;" value="<?php include('commentDis.php'); ?>"/>
+					<input type="text" name="comments" value="<?php include('commentDis.php'); ?>"/>
 					<br/>
 					<h4>Upload a picture of some text (must be a .png):</h4>
 					<input type="file" name="fileToUpload" accept="image/png" id="fileToUpload"/>
@@ -171,7 +171,7 @@
 					} );
 					</script>
 					<br/><h4>Comments:</h4>
-					<input type="text" name="comments" style="width: 650px;"/>
+					<input type="text" name="comments"/>
 					<br/>
 					<h4>Upload a picture of some text (must be a .png):</h4>
 					<input type="file" name="fileToUpload" accept="image/png" id="fileToUpload"/>
@@ -186,7 +186,7 @@
 	
 	<div id="infoBox">
 		
-	<h4> Keyboard Macros:</h4><p>2. CTRL + 0-9 = Change Background<br/>3. CTRL + e = Change Editor Background</p>
+	<h4> Keyboard Macros:</h4><p>Change Background = CTRL + 0-9<br/>Change Editor Background = CTRL + q</p>
 	</div>
    
   </body>
