@@ -75,6 +75,7 @@
 						echo "<th>Date of Creation</th>";
 					echo "</thead>";
 					echo "<tbody>";
+					$i = 0;
 						while($dataRow=mysqli_fetch_array($notes,MYSQL_BOTH)){
 								//temporary
 								echo "<tr><td><a href='index.php?username=".$dataRow['author']."&title=".$dataRow['title']."&comments=".$dataRow['comments']."'>";
@@ -84,32 +85,40 @@
 								echo "</a></td><td>";
 								echo $dataRow['last_mod'];
 								echo "</td><td>";
-								echo "<form action ='deleteNotes.php?username=".$dataRow['author']."&title=".$dataRow['title']."&comments=".$dataRow['comments']."'method='POST'";
+								echo "<form action ='deleteNotes.php?username=".$dataRow['author']."&title=".$dataRow['title']."' method='POST'";
 								echo "onclick = 'return confirmDelete()'>";
 								echo "<input type='submit' value='Delete'/></form>";
 								echo "</td><td>";
-								echo "<a class='btn btn-primary' data-toggle='modal' href ='#".$dataRow['author']."".$dataRow['title']."' >Share</a></td></tr>";
+								echo "<a class='btn btn-primary' data-toggle='modal' href ='#".$i."'>Share</a></td></tr>";
 								
-								//Modal Dialog 
-								echo "<div class='modal fade' id='".$dataRow['author']."".$dataRow['title']."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>";
+									//Modal Dialog 
+								echo "<div class='modal fade' id='".$i."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>";						
 									echo "<div class='modal-dialog'>";
 										echo "<div class='modal-content'>";
+											echo "<div class='modal-header' style = 'background-color: #337ab7'>";
+												echo "<h4 class='modal-title' style = 'color: white'>Share</h4>";
+											echo "</div>";
 											echo "<div class='modal-body'>";
 												echo "<h2>Post to Public</h2>";
-												echo "<a class='btn btn-primary' href ='addShare.php?username=".$dataRow['author']."&title=".$dataRow['title']."&share=ADMIN'>Share</a>";
+												echo "<div class ='container'>";
+													echo "<a class='btn btn-primary' href ='addShare.php?username=".$dataRow['author']."&title=".$dataRow['title']."&share=ADMIN'>Public</a>";
+												echo "</div>";
+												
 												$statement="SELECT * FROM Friends WHERE username='".$_GET["username"]."';";
 												$friends=mysqli_query($DBconnection,$statement);
 		
-												echo "</br><h3>Share with Friends</h3>";
+												echo "<hr><h3>Share with Friends</h3>";
 												if (mysqli_num_rows($friends)==0) { 
 													echo "You have no friends.";
 												}
 												else{
-													while($friend=mysqli_fetch_array($friends,MYSQL_BOTH)){
-														echo "<p><a href = 'addShare.php?username=".$dataRow['author']."&title=".$dataRow['title']."&share=".$friend['friend']."'>";
-														echo $friend['friend'];
-														echo "</a></p>";
-													}
+													echo "<div class ='container'>";
+														while($friend=mysqli_fetch_array($friends,MYSQL_BOTH)){
+															echo "<p><a href = 'addShare.php?username=".$dataRow['author']."&title=".$dataRow['title']."&share=".$friend['friend']."'>";
+															echo $friend['friend'];
+															echo "</a></p>";
+														}
+													echo "</div>";
 												}
 												mysqli_free_result($friends);	
 					
@@ -121,6 +130,7 @@
 									echo "</div>";
 								echo "</div>";
 								//End of Modal
+							$i++;
 						}
 					echo "</tbody>";
 					echo "</table></br>";
