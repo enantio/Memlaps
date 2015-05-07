@@ -21,6 +21,9 @@
     <script src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrap-arrows.js"></script>
 	
+	<!--search script-->
+	<script src="js/searchJava.js"></script>
+	
 	<script src="js/confirm.js"></script>
 
 

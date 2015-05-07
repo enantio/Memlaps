@@ -18,9 +18,9 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
-    <!--nicedit-->
-  <script src="//cdn.ckeditor.com/4.4.7/full/ckeditor.js"></script>
-  
+    <!--ckeditor-->
+  <script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+	
     <!--bootstrap-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
     <script src="js/bootstrap.js"></script>
