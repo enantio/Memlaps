@@ -1,8 +1,12 @@
 <?php
-	if(isset($_POST['addAFriend'])){
+	
+	if(isset($_POST['addAFriend']) ||isset($_GET['addAFriend']) ){
 		//check friends name and use secure copy from DBconnection
+		if(isset($_GET['publicPage']) || isset($_POST['publicPage']))
+		include('dbConnect.php');
+	
 		$statement=$DBconnection->prepare("select username from User_Info where username=?;");
-		$statement->bind_param('s',$_POST['addAFriend']);
+		$statement->bind_param('s',$_GET['addAFriend']);
 		$statement->execute();
 		$note=$statement->get_result();
 		$FriendsName=$note->fetch_assoc();
@@ -19,5 +23,11 @@
 		else{
 			mysqli_free_result($friends);
 		}
+		if(isset($_GET['publicPage']) || isset($_POST['publicPage'])){
+			$myProfile = "publicProfile.php?username=".$_GET['username']."&user=".$_GET['addAFriend'];
+			header('Location: '.$myProfile);
+			include('dbConnect.php');
+		}
+	
 	}
 ?>

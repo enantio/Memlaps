@@ -1,9 +1,28 @@
 
+html{
+height: 100%;
+overflow: auto;
+
+}
+
+#front{
+font-family: Audimat;
+display: inline;
+position: relative;
+left: -30px;
+top: 5px;
+color: orange;
+display: inline;
+margin-left: 0px;
+}
+
 #infoBox{
-color: red;
+position: relative;
+bottom: 130px;
+color: black;
 float: right;
 display: inline;
-right: 0px;
+right: 300px;
 width: 300px;
 }
 
@@ -99,19 +118,22 @@ background-repeat: no-repeat;
 }
 
 
-
-
 .tground0{
      background-color: #FFFFCC;
 }
 
 .tground1{
-	background-color: #525229;
+	background-color: #0D0000;
 }
 
 
 body {
-   position: center;
+position: center;
+background: url(http://arsgrafik.s3.amazonaws.com/uploads/2010/03/cool-backgrounds-night-glow.jpg);
+background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
 }
 
 .tab-pane{

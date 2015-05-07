@@ -19,9 +19,8 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
     <!--nicedit-->
-    <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-    <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
-    
+  <script src="//cdn.ckeditor.com/4.4.7/full/ckeditor.js"></script>
+  
     <!--bootstrap-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
     <script src="js/bootstrap.js"></script>
@@ -30,7 +29,7 @@
 	<script src="js/searchJava.js"></script>
 	
 	<!--tab.js-->
-   <script src="tab.js"></script>
+   <script src="tabs.js"></script>
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
 
    
@@ -70,8 +69,9 @@
     ?>
 	<div class ="navbar navbar-inverse navbar-static-top"> <!--Navigation Bar -->
 		<div class = "container" role = "tabpanel">
-            <h1 id="front">Memlaps</h1>		
+            
             <ul class=" nav navbar-nav" role = "tablist">
+				<li><h1 id="front">Memlaps</h1></li>
 			    <li role="presentation" <?php if(!isset($_POST["title"]) && !isset($_GET["title"])):?> class = "active" <?php endif; ?>  ><a href = "#BlankPage"  aria-controls="BlankPage" role="tab" data-toggle="tab">Blank Page</a></li>  <!--Creates a Blank Page. If it's save it is sent to another tab--> 
                 <?php if	(isset($_POST["title"]) || isset($_GET["title"]))  :?><li role="presentation" class = "active"><a href="#FileName"  aria-controls="FileName" role="tab" data-toggle="tab"><?php include('titleDis.php'); ?></a></li> <!--If a file is opened it creates a new tab-->
 				<?php endif; ?> 
@@ -138,6 +138,12 @@
 					<input type="text" id="entitled" name="title" value="<?php include('titleDis.php'); ?>"/>
 					<br/>
 					<br/><textarea id="THE_BOX cols="186" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
+					<script>
+					CKEDITOR.replace( 'noteText',
+					{
+						height: '800px',
+					} );
+					</script>
 					<br/><h4>Comments:</h4>
 					<input type="text" name="comments" style="width: 650px;" value="<?php include('commentDis.php'); ?>"/>
 					<br/>
@@ -152,12 +158,18 @@
 		<?php endif; ?> 
 		
 		<!--Blank Page Tab-->
-		<div role="tabpanel" class="tab-pane <?php if(!isset($_POST["title"])|| !isset($_GET["title"])):?> active <?php endif; ?>"id="BlankPage">
+		<div role="tabpanel" class="tab-pane  <?php if(!isset($_POST["title"]) && !isset($_GET["title"])):?>active <?php endif; ?>"id="BlankPage">
 				<form action="index.php?username=<?php include('displayUN.php');?>" method="POST"  enctype="multipart/form-data" >
 					<h4>Title:</h4>
 					<input id="entitled" type="text" name="title" />
 					<br/>
-					<br/><textarea id="THE_BOX" cols="186" rows="25" name="noteText"></textarea>
+					<br/><textarea id="THE_BOX" cols="186" rows="25" name="blankText"></textarea>
+					<script>
+						CKEDITOR.replace( 'blankText',
+					{
+						height: '800px',
+					} );
+					</script>
 					<br/><h4>Comments:</h4>
 					<input type="text" name="comments" style="width: 650px;"/>
 					<br/>
@@ -176,7 +188,6 @@
 		
 	<h4> Keyboard Macros:</h4><p>2. CTRL + 0-9 = Change Background<br/>3. CTRL + e = Change Editor Background</p>
 	</div>
-	
    
   </body>
     

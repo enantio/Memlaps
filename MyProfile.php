@@ -159,7 +159,7 @@
 									echo $dataRow['title'];
 									echo "</a></td><td>";
 									if ($_GET['username'] != $dataRow['author'])
-										echo "<a href='publicProfile.php?username=".$_GET['username']." &user=".$dataRow['author']."'>";
+										echo "<a href='publicProfile.php?username=".$_GET['username']."&user=".$dataRow['author']."'>";
 									else 
 										echo "<a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
 									echo $dataRow['author'];
@@ -194,7 +194,7 @@
 								echo $dataRow['title'];
 								echo "</a></td><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
 								echo $dataRow['author'];
-								echo "</a></td><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+								echo "</a></td><td><a href='publicProfile.php?username=".$_GET['username']."&user=".$dataRow['share_W_user']."'>";
 								if($dataRow['share_W_user']=="ADMIN")echo "Public";
 								else echo $dataRow['share_W_user'];
 								echo "</td><td>";
@@ -229,15 +229,18 @@
 			echo "<tbody>";
 				while($dataRow=mysqli_fetch_array($friends,MYSQL_BOTH)){
 						//temporary
-						echo "<tr><td><a href = 'publicProfile.php?username=".$_GET['username']." &user=".$dataRow['friend']."'>";
+						echo "<tr><td><a href ='publicProfile.php?username=".$_GET['username']."&user=".$dataRow['friend']."'>";
 						echo $dataRow['friend'];
-						echo "</td></tr>";
+						echo "</td><td>";
+						echo "<form action ='deleteFriend.php?username=".$_GET['username']."&friend=".$dataRow['friend']."' method='POST'";
+						echo "onclick = 'return confirmUnfriend()'>";
+						echo "<input type='submit' value='Unfriend'/></form></td>";
+						echo "</tr>";
 				}
 			echo "</tbody>";
 			echo "</table>";
 		}
 		mysqli_free_result($friends);
-		
 	?>
 	
 	<form role = "form" action="MyProfile.php?username=<?php echo $_GET['username']; ?>" method="POST"/>

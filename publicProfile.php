@@ -1,13 +1,14 @@
 <?php
 	session_start();
 	
-	if(empty($_SESSION["UserCheck"]))
+	/*if(empty($_SESSION["UserCheck"]))
 		header("Location: memlapsSignIn.php");
 	if(isset($_POST["username"]) && $_POST["username"]!=$_SESSION['name'])
 		header("Location: index.php?signout=true");
 	if(isset($_GET["username"]) && $_GET["username"]!=$_SESSION['name'])
 		header("Location: index.php?signout=true");
-?>
+*/
+	?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrap-arrows.js"></script>
+	
+	<script src="js/confirm.js"></script>
 
 
 </head>
@@ -50,13 +53,17 @@
     </div>
     
     <div class = "container">
-		<h1><?php echo $_GET['user']; ?></h1>
-		<h2> Notes</h2>
+		<ul class = "list-inline">
+		<li><h1><?php echo $_GET['user']; ?></h1></li>
+		<li><form class action ='addFriend.php?username=<?php echo $_GET['username'];?>&addAFriend=<?php echo $_GET['user'];?>&publicPage=true' method='POST' onclick = 'return confirmFriend()'>
+		<button type='submit' class = "btn btn-xs">Add Friend</button></form></li>
+		</ul>
+		<br><h2> Notes</h2>
 		<?php
 			$statement="select * from Note_Share where author='".$_GET["user"]."' AND share_W_user='ADMIN';";
 				$notes=mysqli_query($DBconnection,$statement);
 				
-				echo "</br><h3>Public Notes.</h3>";
+				echo "<h3>Public Notes.</h3>";
 				if (mysqli_num_rows($notes)==0) { 
 					echo "They are not sharing any note files.";
 				}	
