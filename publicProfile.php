@@ -55,8 +55,8 @@
     <div class = "container">
 		<ul class = "list-inline">
 		<li><h1><?php echo $_GET['user']; ?></h1></li>
-		<li><form class action ='addFriend.php?username=<?php echo $_GET['username'];?>&addAFriend=<?php echo $_GET['user'];?>&publicPage=true' method='POST' onclick = 'return confirmFriend()'>
-		<button type='submit' class = "btn btn-xs">Add Friend</button></form></li>
+		<li><div class ="col-lg-1 col-offset-6"><form class action ='addFriend.php?username=<?php echo $_GET['username'];?>&addAFriend=<?php echo $_GET['user'];?>&publicPage=true' method='POST' onclick = 'return confirmFriend()'>
+		<button type='submit' class = "btn btn-xs">Add Friend</button></form></div></li>
 		</ul>
 		<br><h2> Notes</h2>
 		<?php
