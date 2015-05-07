@@ -77,7 +77,6 @@
 				<?php endif; ?> 
 			</ul> 
 	
-			
             <ul class=" nav navbar-nav navbar-right">
 			
 			<li>
@@ -105,7 +104,6 @@
 					</form>
 				</li>
 			
-			
               <?php if(isset($_POST["username"]) || isset($_GET["username"])) : ?>  <!--Checks to see if signed in-->
 					<li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -123,27 +121,27 @@
 				 </li>
 				
              </ul>
-	
 			</div>
 		</div>
    
    <div class = "tab-content container" >
-   
-		<!--Saved Notes Tab-->
-		<div role="tabpanel" class="tab-pane  <?php if(isset($_POST["title"]) || isset($_GET["title"])):?>active<?php endif; ?> " id="FileName">
+		
+		<!--Saved Notes Tab--> <?php if(isset($_POST["title"]) || isset($_GET["title"])):?>
+		<div role="tabpanel" class="tab-pane active" id="FileName">
 			<?php if(!isset($_GET['author'])) :?>
-				<form action="index.php?username=<?php include('displayUN.php');?>" method="POST" enctype="multipart/form-data"/>
+				<form action="index.php?username=<?php include('displayUN.php');?>" method="POST" enctype="multipart/form-data">
 			<?php else:?>
-				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST" enctype="multipart/form-data"/>
+				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST" enctype="multipart/form-data">
 			<?php endif; ?>
 					
-					<h4>Title:<h4>
+					<h4>Title:</h4>
 					<input type="text" id="entitled" name="title" value="<?php include('titleDis.php'); ?>"/>
-					</br><textarea id="THE_BOX cols="186" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
-					</br><h4>Comments:<h4>
+					<br/>
+					<br/><textarea id="THE_BOX cols="186" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
+					<br/><h4>Comments:</h4>
 					<input type="text" name="comments" value="<?php include('commentDis.php'); ?>"/>
 					<br/>
-					<h4>Upload a picture of some text (must be a .png):<h4>
+					<h4>Upload a picture of some text (must be a .png):</h4>
 					<input type="file" name="fileToUpload" accept="image/png" id="fileToUpload"/>
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>
@@ -151,22 +149,19 @@
 					<input type="submit" value="Save"/>
 				</form>
 		</div>
+		<?php endif; ?> 
 		
 		<!--Blank Page Tab-->
-		<div role="tabpanel" class="tab-pane  <?php if(!isset($_POST["title"]) && !isset($_GET["title"])):?> active <?php endif; ?>"id="BlankPage">
-			<?php if(!isset($_GET['author'])) :?>
-				<form action="index.php?username=<?php include('displayUN.php');?>" method="POST"  enctype="multipart/form-data" />
-			<?php else:?>
-				<form action="index.php?username=<?php include('displayUN.php'); echo "&author=".$_GET['author'];?>" method="POST" enctype="multipart/form-data"/>
-			<?php endif; ?>
-					<h4>Title:<h4>
+		<div role="tabpanel" class="tab-pane <?php if(!isset($_POST["title"])|| !isset($_GET["title"])):?> active <?php endif; ?>"id="BlankPage">
+				<form action="index.php?username=<?php include('displayUN.php');?>" method="POST"  enctype="multipart/form-data" >
+					<h4>Title:</h4>
 					<input id="entitled" type="text" name="title" />
 					<br/>
-					</br><textarea id="THE_BOX" cols="186" rows="25" name="noteText"></textarea>
-					</br><h4>Comments:<h4>
+					<br/><textarea id="THE_BOX" cols="186" rows="25" name="noteText"></textarea>
+					<br/><h4>Comments:</h4>
 					<input type="text" name="comments"/>
 					<br/>
-					<h4>Upload a picture of some text (must be a .png):<h4>
+					<h4>Upload a picture of some text (must be a .png):</h4>
 					<input type="file" name="fileToUpload" accept="image/png" id="fileToUpload"/>
 					<br/>
 					<input type="hidden" name="username" value="<?php include('displayUN.php');?>"/>

@@ -46,7 +46,6 @@
                         <li><a href="index.php">Logout</a></li>  <!--Returns you to initial blank index page-->
                     </ul>
             </ul>
-
         </div>
     </div>
     

@@ -18,6 +18,7 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
+	<script src="js/confirm.js"></script>
     <script type="text/javascript" src="js/bootstrap-arrows.js"></script>
 
 
@@ -82,15 +83,44 @@
 								echo $dataRow['author'];
 								echo "</a></td><td>";
 								echo $dataRow['last_mod'];
-								echo "</td>";
-								echo "<td><a href ='deleteNotes.php?username=".$dataRow['author']."&title=".$dataRow['title']."&comments=".$dataRow['comments']."'>delete</a></td>";
-								/*while($dataShare=mysqli_fetch_array($noteshare,MYSQL_BOTH))
-									{	
-										if($dataShare['share_W_user'] =="ADMIN" && $dataRow['title'] == $dataShare['title'])
-											echo "<td><a href ='#'>public</a></td>";	
-								}*/
-								echo "<td><a href ='addShare.php?username=".$dataRow['author']."&title=".$dataRow['title']."&share=ADMIN'>share</a></td>";
-								echo "</tr>";
+								echo "</td><td>";
+								echo "<form action ='deleteNotes.php?username=".$dataRow['author']."&title=".$dataRow['title']."&comments=".$dataRow['comments']."'method='POST'";
+								echo "onclick = 'return confirmDelete()'>";
+								echo "<input type='submit' value='Delete'/></form>";
+								echo "</td><td>";
+								echo "<a class='btn btn-primary' data-toggle='modal' href ='#".$dataRow['author']."".$dataRow['title']."' >Share</a></td></tr>";
+								
+								//Modal Dialog 
+								echo "<div class='modal fade' id='".$dataRow['author']."".$dataRow['title']."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>";
+									echo "<div class='modal-dialog'>";
+										echo "<div class='modal-content'>";
+											echo "<div class='modal-body'>";
+												echo "<h2>Post to Public</h2>";
+												echo "<a class='btn btn-primary' href ='addShare.php?username=".$dataRow['author']."&title=".$dataRow['title']."&share=ADMIN'>Share</a>";
+												$statement="SELECT * FROM Friends WHERE username='".$_GET["username"]."';";
+												$friends=mysqli_query($DBconnection,$statement);
+		
+												echo "</br><h3>Share with Friends</h3>";
+												if (mysqli_num_rows($friends)==0) { 
+													echo "You have no friends.";
+												}
+												else{
+													while($friend=mysqli_fetch_array($friends,MYSQL_BOTH)){
+														echo "<p><a href = 'addShare.php?username=".$dataRow['author']."&title=".$dataRow['title']."&share=".$friend['friend']."'>";
+														echo $friend['friend'];
+														echo "</a></p>";
+													}
+												}
+												mysqli_free_result($friends);	
+					
+											echo "</div>";
+											echo "<div class='modal-footer'>";
+												echo "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>";
+											echo "</div>";
+										echo "</div>";
+									echo "</div>";
+								echo "</div>";
+								//End of Modal
 						}
 					echo "</tbody>";
 					echo "</table></br>";
@@ -150,24 +180,25 @@
 						echo "<tbody>";
 							while($dataRow=mysqli_fetch_array($notes,MYSQL_BOTH)){
 									//temporary
-									echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
-									echo $dataRow['title'];
-									echo "</a></td><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
-									echo $dataRow['author'];
-									echo "</a></td><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
-									if($dataRow['share_W_user']=="ADMIN")echo "Public";
-									else echo $dataRow['share_W_user'];
-									echo "</td><td><a href ='removeShare.php?username=".$dataRow['author']."&title=".$dataRow['title']."'>unshare</a></td>";
-									echo "</a></td></tr>";
+								echo "<tr><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+								echo $dataRow['title'];
+								echo "</a></td><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+								echo $dataRow['author'];
+								echo "</a></td><td><a href='index.php?username=".$_GET['username']."&author=".$dataRow['author']."&title=".$dataRow['title']."'>";
+								if($dataRow['share_W_user']=="ADMIN")echo "Public";
+								else echo $dataRow['share_W_user'];
+								echo "</td><td>";
+								echo "<form action ='removeShare.php?username=".$dataRow['author']."&title=".$dataRow['title']."&share=".$dataRow['share_W_user']."' method='POST'";
+								echo "onclick = 'return confirmUnshare()'>";
+								echo "<input type='submit' value='Unshare'/></form></td>";
+								echo "</tr>";
 							}
 						echo "</tbody>";
 					echo "</table>";
 					mysqli_free_result($notes);
 				}
 			}
-			
-		?>
-		
+	?>
 	</div>
 	<div class = "container"><!--friends div-->
 	
@@ -208,6 +239,8 @@
 		<button type="submit" class="btn btn-default btn-sm">Add Friend</button>
 	</form>
 	</div>
+	
+	
 </body>
 
 

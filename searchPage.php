@@ -83,7 +83,7 @@
 	</div>
 		
 	<div class = "container">
-		<h1> Search Page</h1>
+		<h1> Search Page</h1><br>
 		
 		<?php
 		include('dbConnect.php');
@@ -107,8 +107,10 @@
 			$i = 0;
 			$array =[];
 			$author = [];
-			while($search = mysqli_fetch_array($search_query,MYSQL_BOTH))
-			{
+			
+			$search = mysqli_fetch_array($search_query,MYSQL_BOTH);
+			do{
+				
 				if($search==NULL){
 					echo "<h3>Nothing matches your search</h3>";
 					break;
@@ -128,9 +130,12 @@
 					}
 			
 				}
+				$search = mysqli_fetch_array($search_query,MYSQL_BOTH);
+				
 			}
-			for($i = 0; $i <count($array); $i++)
-			{
+			while($search);
+			
+			for($i = 0; $i <count($array); $i++){
 				echo "<p>";
 				if($_GET['search_param'] == 'Notes')
 					echo "<a href ='index.php?username=".$_GET['username']."&author=".$author[$i]."&title=".$array[$i]."'>";
