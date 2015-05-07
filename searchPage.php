@@ -8,7 +8,6 @@
 	if(isset($_GET["username"]) && $_GET["username"]!=$_SESSION['name'])
 		header("Location: index.php?signout=true");
 ?>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -140,7 +139,7 @@
 				if($_GET['search_param'] == 'Notes')
 					echo "<a href ='index.php?username=".$_GET['username']."&author=".$author[$i]."&title=".$array[$i]."'>";
 				else 
-					echo "<a href ='publicProfile.php?username=".$_GET['username']." &user=".$array[$i]."'>";
+					echo "<a href ='publicProfile.php?username=".$_GET['username']."&user=".$array[$i]."'>";
 				echo $array[$i];
 				echo "</a></p>";
 			}

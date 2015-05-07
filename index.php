@@ -39,7 +39,7 @@
   <body>
 	<?php
 		include('dbConnect.php');
-		if(isset($_POST['noteText'])){
+		if(isset($_POST['blankText']) || isset($_POST['noteText']) ){
 			if(!isset($_GET['author']))$author=$_POST['username'];
 			else $author=$_GET['author'];
 			$statement=$DBconnection->prepare("SELECT * FROM Notes WHERE author='".$author."' and title= ?;");
@@ -51,7 +51,8 @@
 			if(isset($_FILES['fileToUpload'])){
 				include('OCRnoteAdd.php');			
 			}
-			else $savedNotes=$_POST['noteText'];
+			else if (isset($_POST['noteText']))$savedNotes=$_POST['noteText'];
+			else $savedNotes=$_POST['blankText'];
 			if(!$dataRow){//check for existing note page
 				$statement->close();
 				$statement=$DBconnection->prepare("INSERT INTO Notes VALUES(?,?,?,?,'".date("r")."','meta stuff');");
@@ -138,7 +139,7 @@
 					<h4>Title:</h4>
 					<input type="text" id="entitled" name="title" value="<?php include('titleDis.php'); ?>"/>
 					<br/>
-					<br/><textarea id="THE_BOX cols="186" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
+					<br/><textarea id="THE_BOX" cols="186" rows="25" name="noteText"><?php include('noteDisplay.php'); ?></textarea>
 					<br/><h4>Comments:</h4>
 					<input type="text" name="comments" style="width: 650px;" value="<?php include('commentDis.php'); ?>"/>
 					<br/>
@@ -153,12 +154,12 @@
 		<?php endif; ?> 
 		
 		<!--Blank Page Tab-->
-		<div role="tabpanel" class="tab-pane <?php if(!isset($_POST["title"])|| !isset($_GET["title"])):?> active <?php endif; ?>"id="BlankPage">
+		<div role="tabpanel" class="tab-pane <?php if(!isset($_POST["title"])&& !isset($_GET["title"])):?> active <?php endif; ?>"id="BlankPage">
 				<form action="index.php?username=<?php include('displayUN.php');?>" method="POST"  enctype="multipart/form-data" >
 					<h4>Title:</h4>
 					<input id="entitled" type="text" name="title" />
 					<br/>
-					<br/><textarea id="THE_BOX" cols="186" rows="25" name="noteText"></textarea>
+					<br/><textarea id="THE_BOX" cols="186" rows="25" name="blankText"></textarea>
 					<br/><h4>Comments:</h4>
 					<input type="text" name="comments" style="width: 650px;"/>
 					<br/>

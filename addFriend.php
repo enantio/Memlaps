@@ -1,17 +1,18 @@
 <?php
 	
-	if(isset($_POST['addAFriend']) ||isset($_GET['addAFriend']) ){
+	if(isset($_POST['addAFriend']) || isset($_GET['addAFriend']) ){
 		//check friends name and use secure copy from DBconnection
-		if(isset($_GET['publicPage']) || isset($_POST['publicPage']))
-		include('dbConnect.php');
+		if(isset($_GET['publicPage']) || isset($_POST['publicPage']))include('dbConnect.php');
 	
 		$statement=$DBconnection->prepare("select username from User_Info where username=?;");
-		$statement->bind_param('s',$_GET['addAFriend']);
+		
+		if(isset($_POST['addAFriend']))$statement->bind_param('s',$_POST['addAFriend']);
+		else $statement->bind_param('s',$_GET['addAFriend']);
+		
 		$statement->execute();
 		$note=$statement->get_result();
 		$FriendsName=$note->fetch_assoc();
 		$statement->close();
-		
 		
 		$statement="SELECT * FROM Friends WHERE username='".$_GET["username"]."' AND friend='".$FriendsName['username']."';";
 		$friends=mysqli_query($DBconnection,$statement);
