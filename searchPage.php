@@ -16,8 +16,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
     <!--nicedit-->
-    <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-    <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+    <script src="//cdn.ckeditor.com/4.4.7/full/ckeditor.js"></script>
     
     <!--bootstrap-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
@@ -35,7 +34,7 @@
 			
             <ul class=" nav navbar-nav navbar-right">
 				<li>
-					<form class="navbar-form" action ="searchPage.php"> <!--Search Bar-->
+				<form class="navbar-form" action ="searchPage.php"> <!--Search Bar-->
 						<div class="form-group" style="display:inline;">
 							<div class="input-group"> 
 								<div class="input-group-btn search-panel">
@@ -46,7 +45,7 @@
 										<li><a href="#Notes">Notes</a></li>
 										<li><a href="#Users">Users</a></li>
 									</ul>
-									<input type="hidden" name="search_param" value="Notes" id="search_param">
+									<input type="hidden" name="search_param" value="Notes" id="search_param">   
 									<input type="hidden" name="username" value="<?php include('displayUN.php');?>">   
 								</div>
 								
@@ -56,7 +55,8 @@
 								</span>
 							</div>
 						</div>
-					</form>
+					</form>  
+					<!-- End of Search Bar-->
 				</li>
 			
 			

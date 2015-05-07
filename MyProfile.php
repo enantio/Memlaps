@@ -20,8 +20,8 @@
     <script src="js/bootstrap.js"></script>
 	<script src="js/confirm.js"></script>
     <script type="text/javascript" src="js/bootstrap-arrows.js"></script>
-
-
+	
+	
 </head>
 <body>
 	<?php
@@ -36,6 +36,31 @@
                 <li><a href="index.php?username=<?php echo $_GET['username']; ?>" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a></li>
             </ul> 
             <ul class=" nav navbar-nav navbar-right">
+				<li>
+				<form class="navbar-form" action ="searchPage.php"> <!--Search Bar-->
+						<div class="form-group" style="display:inline;">
+							<div class="input-group"> 
+								<div class="input-group-btn search-panel">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+										<span id="search_concept">Notes</span> <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#Notes">Notes</a></li>
+										<li><a href="#Users">Users</a></li>
+									</ul>
+									<input type="hidden" name="search_param" value="Notes" id="search_param">   
+									<input type="hidden" name="username" value="<?php include('displayUN.php');?>">   
+								</div>
+								
+								<input type="text" name ="search"class="form-control" placeholder="Search">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+								</span>
+							</div>
+						</div>
+					</form>  
+					<!-- End of Search Bar-->
+				</li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         My Account
